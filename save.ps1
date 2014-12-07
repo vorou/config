@@ -1,3 +1,5 @@
+cd ~\config
+
 $files =
     "$profile",
     "~\.gitconfig",
