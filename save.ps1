@@ -1,4 +1,6 @@
-$files = "~\.gitconfig", "~\.gitignore"
+$files =
+    "~\.gitconfig",
+    "~\.gitignore"
 foreach ($f in $files) {
     cp $f
 }
