@@ -1,6 +1,9 @@
 $files =
+    "$profile",
     "~\.gitconfig",
-    "~\.gitignore"
+    "~\.gitignore",
+    "c:\bin\ConEmu\ConEmu.xml"
+
 foreach ($f in $files) {
     cp $f
 }
