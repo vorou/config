@@ -1,0 +1,43 @@
+[ghfw]
+	disableverification = "true"
+[user]
+	name = vorou
+	email = vorou@skbkontur.ru
+[core]
+	autocrlf = true
+	excludesfile = "C:\\\\Users\\\\vorou\\\\.gitignore"
+[alias]
+	aa = add -A
+	d = diff
+	dc = diff --cached
+	b = branch
+	co = checkout
+	cot = checkout --track
+	cob = checkout -b
+	p = pull
+	ls = "log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+	st = status
+	cl = clean
+	cm = !git add -A && git commit -m
+	amend = commit -a --amend
+	cg = config --global
+	mt = mergetool
+	sha = rev-parse
+	ap = add --patch
+	back = checkout -
+	md = !git co develop && git pull && git back && git merge develop
+[clean]
+	requireForce = false
+[push]
+	default = current
+[merge]
+	tool = kdiff3
+[mergetool]
+	prompt = false
+	keepBackup = false
+[mergetool "kdiff3"]
+	cmd = \"C:\\\\Program Files\\\\KDiff3\\\\kdiff3\" $BASE $LOCAL $REMOTE -o $MERGED --auto
+[branch]
+	autosetuprebase = always
+[credential]
+	helper = !'C:\\Users\\vorou\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
