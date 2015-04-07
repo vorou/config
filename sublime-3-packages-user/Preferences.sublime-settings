@@ -1,0 +1,24 @@
+{
+	"animation_enabled": false,
+	"color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
+	"draw_indent_guides": false,
+	"enable_tab_scrolling": false,
+	"font_face": "Consolas",
+	"font_size": 16,
+	"hot_exit": false,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"remember_open_files": false,
+	"save_on_focus_lost": true,
+	"show_minimap": false,
+	"spacegray_tabs_font_large": true,
+	"spacegray_tabs_xlarge": true,
+	"tab_size": 2,
+	"theme": "Spacegray Eighties.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": false,
+	"update_check": false
+}

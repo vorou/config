@@ -1,0 +1,18 @@
+{
+    "in_process_packages":  [
+
+                            ],
+    "install_prereleases":  {
+                                "IsPresent":  false
+                            },
+    "installed_packages":  [
+                               "Color Highlighter",
+                               "File History",
+                               "Open-Include",
+                               "Package Control",
+                               "PackageResourceViewer",
+                               "PowerShell",
+                               "Pretty JSON",
+                               "Theme - Spacegray"
+                           ]
+}

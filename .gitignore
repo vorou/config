@@ -34,4 +34,17 @@
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db 
+Thumbs.db
+
+# Sublime 3 #
+#############
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+Color Highlighter/ColorPicker_linux_x64
+Package Control.*bundle
+Default (Linux).sublime-keymap
+FileHistory*
