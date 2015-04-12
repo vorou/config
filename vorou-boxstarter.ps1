@@ -1,5 +1,7 @@
 # boxstarter.org/package/url?https://raw.githubusercontent.com/vorou/config/master/vorou-boxstarter.ps1
 
+Disable-UAC
+
 cup -y chocolatey
 cinst -y git -params '/GitOnlyOnPath'
 if (!(where.exe git)) { Invoke-Reboot }
