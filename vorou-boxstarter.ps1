@@ -10,5 +10,7 @@ git clone https://github.com/vorou/config.git
 cinst -y ConEmu
 $conemuLink = "C:\Program Files\ConEmu\ConEmu.xml"
 $conemuConfig = resolve-path ~\config\ConEmu.xml
-rm $conemuLink
+if (test-path $conemuLink) {
+  rm $conemuLink
+}
 cmd /c mklink $conemuLink $conemuConfig
