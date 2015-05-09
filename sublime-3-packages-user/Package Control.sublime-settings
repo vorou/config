@@ -12,6 +12,7 @@
 		"Color Highlighter",
 		"File History",
 		"FileSystem Autocompletion",
+		"Gitignored File Excluder",
 		"HexViewer",
 		"Markdown Preview",
 		"Open-Include",
@@ -19,6 +20,7 @@
 		"PackageResourceViewer",
 		"PowerShell",
 		"Pretty JSON",
+		"sublime-github",
 		"SublimeLinter",
 		"SublimeLinter-jshint",
 		"Theme - Spacegray"
