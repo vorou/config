@@ -1,6 +1,6 @@
 {
 	"animation_enabled": false,
-	"color_scheme": "Packages/User/SublimeLinter/base16-eighties.dark (SL).tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/base16-ocean.dark (SL).tmTheme",
 	"draw_indent_guides": false,
 	"enable_tab_scrolling": false,
 	"font_face": "Consolas",
@@ -16,7 +16,7 @@
 	"spacegray_tabs_font_large": true,
 	"spacegray_tabs_xlarge": true,
 	"tab_size": 2,
-	"theme": "Spacegray Eighties.sublime-theme",
+	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false
