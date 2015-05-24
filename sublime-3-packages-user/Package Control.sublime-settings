@@ -9,6 +9,7 @@
 	"installed_packages":
 	[
 		"AdvancedNewFile",
+		"BufferScroll",
 		"Color Highlighter",
 		"File History",
 		"FileSystem Autocompletion",
