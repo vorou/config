@@ -415,6 +415,7 @@ II.2.12 &lt;HandlesEvent /&gt;&#xD;
 &#xD;
 &lt;/Patterns&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/CSharpMemberOrderPattern/LayoutType/@EntryValue">CustomLayout</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/EncapsulateField/UseAutoProperty/@EntryValue">False</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=AO/@EntryIndexedValue">AO</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=DB/@EntryIndexedValue">DB</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=OOS/@EntryIndexedValue">OOS</s:String>
@@ -460,7 +461,7 @@ II.2.12 &lt;HandlesEvent /&gt;&#xD;
 	<s:Int64 x:Key="/Default/Environment/UnitTesting/ParallelProcessesCount/@EntryValue">4</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/SaveSessionState/@EntryValue">False</s:Boolean>
 	
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">06/02/2015 11:53:25</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">06/03/2015 11:53:29</s:String>
 	<s:String x:Key="/Default/Environment/UserInterface/ShortcutSchemeName/@EntryValue">VS</s:String>
 	
 	<s:String x:Key="/Default/Environment/UserInterface/ThemedIcon/IconThemeSelection/@EntryValue">GrayDark</s:String>
@@ -657,9 +658,9 @@ II.2.12 &lt;HandlesEvent /&gt;&#xD;
 	
 	<s:Boolean x:Key="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Housekeeping/IntellisenseHousekeeping/HintUsed/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialog/Position/@EntryValue">[90,70](780,600)</s:String>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialog/SelectedPageId/@EntryValue">SymbolServer</s:String>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-230,-160</s:String>
+	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialog/Position/@EntryValue">[90,70.4](780,600)</s:String>
+	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialog/SelectedPageId/@EntryValue">TestCopPageId</s:String>
+	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-281,126</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue">True</s:Boolean>
 	<s:Int64 x:Key="/Default/Housekeeping/TreeModelBrowserPanelPersistance/PreviewSplitterVerticalPosition/=UnitTestSessionView/@EntryIndexedValue">1095</s:Int64>
 	<s:Boolean x:Key="/Default/Housekeeping/UpgradeFromExceptionReport/UpgradePerformed/@EntryValue">True</s:Boolean>
