@@ -6,5 +6,6 @@
 			"base_uri": "https://api.github.com",
 			"github_token": "40967024e8e0dc3722586a51909c4e437d3098f9"
 		}
-	}
+	},
+	"active_account": "GitHub"
 }
