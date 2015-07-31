@@ -1,0 +1,19 @@
+hd4000
+3/7/2014
+10.18.10.3496
+
+- config/init.ps1
+
+soft
+- conemu
+- powershell profile
+- VS
+- Firefox
+- sublime
+- bin
+- gitconfig/gitignore
+
+folders
+- user
+- code
+- .ssh
