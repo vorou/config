@@ -228,3 +228,4 @@ commit-message.txt
 Source/Gofra.sln.vsext
 
 .vs/
+sublime-3-packages-user/FileHistory*
