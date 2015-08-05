@@ -1,0 +1,12 @@
+- config/init.ps1
+- hosts
+- conemu
+- powershell profile
+- VS
+- Firefox
+- sublime
+- bin
+- gitconfig/gitignore
+- user
+- code
+- .ssh

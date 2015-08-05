@@ -3,7 +3,15 @@
 	"color_scheme": "Packages/User/SublimeLinter/base16-ocean.dark (SL).tmTheme",
 	"draw_indent_guides": false,
 	"enable_tab_scrolling": false,
+	"file_exclude_patterns":
+	[
+		"C/Users/vorou/code/config/sublime-3-packages-user/Color Highlighter/ColorPicker_win.exe"
+	],
 	"find_selected_text": false,
+	"folder_exclude_patterns":
+	[
+		"C/Users/vorou/code/config/sublime-3-packages-user/Package Control.cache"
+	],
 	"font_face": "Consolas",
 	"font_size": 16,
 	"highlight_line": true,

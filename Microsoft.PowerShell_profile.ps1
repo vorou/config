@@ -21,7 +21,6 @@ function global:prompt {
     $global:LASTEXITCODE = $realLASTEXITCODE
     return "`r`n> "
 }
-Enable-GitColors
 Pop-Location
 
 Remove-Item alias:curl
@@ -43,6 +42,7 @@ New-Alias gh "C:\Users\vorou\AppData\Roaming\Microsoft\Windows\Start Menu\Progra
 New-Alias subl "C:\Program Files\Sublime Text 3\sublime_text.exe"
 New-Alias rein 'C:\bin\ReadyToIndex\ReadyToIndexMessageSender.exe'
 New-Alias down 'C:\bin\DownloadAttachments\DownloadAttachments.exe'
+New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 
 function idea {
    & "C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 14.1.3\bin\idea.exe" $pwd
@@ -205,16 +205,22 @@ function octave {
 function raw($url) {
   $url -match '(?:.*\/|^)(.*)$' | out-null
   $id = $Matches[1]
-  mongoexport --quiet --pretty -h gofra1 -d gofra -c purchases -q @('{"_id":'''+$id+'''}') -o c:\output.js
-  subl c:\output.js
+  $output = "$env:home\desktop\output.js"
+  mongoexport --quiet --pretty -h gofra1 -d gofra -c purchases -q @('{"_id":'''+$id+'''}') -o $output
+  atom $output
 }
 
 function me($command) {
   $printJson = 'printjson("'+$command+'")'
-  mongo gofra1/gofra --eval $printJson
+  mongo gofra2/gofra --eval $printJson
 }
 
 . ~\Documents\WindowsPowerShell\Remove-Item.ps1
 . ~\Documents\WindowsPowerShell\Change-Directory.ps1
+
+function ssh-gofra {
+  sls gofra: ~\code\gofra\Deployment\credentials.md
+  ssh gofra@zakupki.kontur.ru
+}
 
 cd ~\code\gofra
