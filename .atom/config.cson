@@ -1,0 +1,28 @@
+"*":
+  "exception-reporting":
+    userId: "cf001112-7aaf-95e4-e1b8-764cdac1e579"
+  welcome:
+    showOnStartup: false
+  core:
+    autoHideMenuBar: true
+    disabledPackages: [
+      "wrap-guide"
+      "archive-view"
+      "background-tips"
+      "image-view"
+    ]
+    audioBeep: false
+    themes: [
+      "base-16-ocean-dark-ui-theme"
+      "base16-ocean-dark"
+    ]
+  editor:
+    invisibles: {}
+    fontFamily: "Consolas"
+    fontSize: 21
+  autosave:
+    enabled: true
+  "autohide-tree-view": {}
+  "tree-view": {}
+  "recent-finder": {}
+  "one-dark-ui": {}

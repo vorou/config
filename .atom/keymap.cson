@@ -1,0 +1,12 @@
+'.platform-win32, .platform-linux':
+  'alt-l': 'tree-view:toggle'
+
+'.platform-win32, .platform-win32 .command-palette atom-text-editor':
+  'ctrl-p': 'command-palette:toggle'
+
+'.platform-win32':
+  'ctrl-n': 'fuzzy-finder:toggle-file-finder'
+  'ctrl-t': 'application:new-file'
+
+'.platform-win32 atom-text-editor':  
+  'ctrl-e': 'recent-finder:toggle'
