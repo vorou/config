@@ -17,3 +17,5 @@ folders
 - user
 - code
 - .ssh
+
+http://serverfault.com/questions/396722/your-system-administrator-does-not-allow-the-user-of-saved-credentials-to-log-on

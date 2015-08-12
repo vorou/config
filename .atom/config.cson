@@ -19,10 +19,12 @@
   editor:
     invisibles: {}
     fontFamily: "Consolas"
-    fontSize: 21
+    fontSize: 20
   autosave:
     enabled: true
   "autohide-tree-view": {}
   "tree-view": {}
   "recent-finder": {}
   "one-dark-ui": {}
+  "atom-beautify":
+    _analyticsUserId: "060e9cc3-ce26-4fbf-a7d2-e2d32252dc0b"

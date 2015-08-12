@@ -469,7 +469,7 @@ II.2.12 &lt;HandlesEvent /&gt;&#xD;
 	<s:Int64 x:Key="/Default/Environment/UnitTesting/ParallelProcessesCount/@EntryValue">4</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/SaveSessionState/@EntryValue">False</s:Boolean>
 	
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">08/05/2015 14:03:06</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">08/12/2015 12:23:07</s:String>
 	<s:String x:Key="/Default/Environment/UserInterface/ShortcutSchemeName/@EntryValue">VS</s:String>
 	
 	<s:String x:Key="/Default/Environment/UserInterface/ThemedIcon/IconThemeSelection/@EntryValue">GrayDark</s:String>
@@ -668,7 +668,7 @@ II.2.12 &lt;HandlesEvent /&gt;&#xD;
 	<s:Boolean x:Key="/Default/Housekeeping/IntellisenseHousekeeping/HintUsed/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialog/Position/@EntryValue">[31,-18](1474,828)</s:String>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialog/SelectedPageId/@EntryValue">EditorAppearance</s:String>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-14,-82</s:String>
+	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-14,-86</s:String>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RegularExpressionEditorWindow/InputColumnWidth/@EntryValue">422</s:String>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RegularExpressionEditorWindow/InputRowHeight/@EntryValue">268.5</s:String>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RegularExpressionEditorWindow/Location/@EntryValue">610,290</s:String>

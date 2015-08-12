@@ -186,6 +186,10 @@ function bye {
     Stop-Computer -Force
 }
 
+function off {
+    Stop-Computer -Force
+}
+
 function c {
   cd ~\code
 }
