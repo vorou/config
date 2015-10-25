@@ -5,10 +5,11 @@ cmd /c mklink "$home\hosts" "C:\Windows\System32\drivers\etc\hosts"
 rm -re -fo "$home\.atom"
 cmd /c mklink /d "$home\.atom" "$config\.atom"
 
-rm "C:\Program Files\ConEmu\ConEmu.xml", $profile, "$home\.gitconfig", "$home\.gitignore"
+rm "C:\Users\vorop\AppData\Roaming\ConEmu.xml", "C:\Program Files\ConEmu\ConEmu.xml", $profile, "$home\.gitconfig", "$home\.gitignore"
 rm -re -fo "$home\AppData\Roaming\Sublime Text 3\Packages\User"
 
 cmd /c mklink "C:\Program Files\ConEmu\ConEmu.xml" "$config\ConEmu.xml"
+cmd /c mklink "C:\Users\vorop\AppData\Roaming\ConEmu.xml" "$config\ConEmu.xml"
 cmd /c mklink $profile "$config\Microsoft.PowerShell_profile.ps1"
 cmd /c mklink "$home\.gitconfig" "$config\.gitconfig"
 cmd /c mklink "$home\.gitignore" "$config\.gitignore"

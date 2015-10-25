@@ -12,10 +12,6 @@
       "image-view"
     ]
     audioBeep: false
-    themes: [
-      "base-16-ocean-dark-ui-theme"
-      "base16-ocean-dark"
-    ]
   editor:
     invisibles: {}
     fontFamily: "Consolas"
