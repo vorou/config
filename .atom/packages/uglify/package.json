@@ -1,0 +1,205 @@
+{
+  "name": "uglify",
+  "version": "1.2.5",
+  "description": "Minify JavaScript",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sindresorhus/atom-uglify.git"
+  },
+  "private": true,
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "activationCommands": {
+    "atom-workspace": "uglify"
+  },
+  "engines": {
+    "atom": ">=1.0.11"
+  },
+  "scripts": {
+    "test": "xo"
+  },
+  "keywords": [
+    "javascript",
+    "minify",
+    "compress",
+    "uglify"
+  ],
+  "dependencies": {
+    "loophole": "^1.1.0",
+    "uglify-js": "^2.5.0"
+  },
+  "devDependencies": {
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true,
+    "globals": [
+      "atom"
+    ]
+  },
+  "readme": "# Uglify\n\n> Minify JavaScript with [Uglify](https://github.com/mishoo/UglifyJS2)\n\n\n## Install\n\n```\n$ apm install uglify\n```\n\nOr Settings → Install → Search for `uglify`\n\n\n## Usage\n\nOpen the Command Palette, and type `uglify`.\n\nCan also minify just a selection. For example the code in a `<script>` tag.\n\n\n## License\n\nMIT © [Sindre Sorhus](http://sindresorhus.com)\n",
+  "readmeFilename": "readme.md",
+  "bugs": {
+    "url": "https://github.com/sindresorhus/atom-uglify/issues"
+  },
+  "homepage": "https://github.com/sindresorhus/atom-uglify#readme",
+  "_id": "uglify@1.2.5",
+  "_shasum": "be6358e3c34a7877cf99aab8779153d2378f1593",
+  "_resolved": "file:..\\d-115915-10584-1agnpzm\\package.tgz",
+  "_from": "..\\d-115915-10584-1agnpzm\\package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "loophole",
+        "version": "1.1.0",
+        "path": "node_modules\\loophole\\lib\\loophole.js"
+      },
+      {
+        "name": "uglify-js",
+        "version": "2.5.0",
+        "path": "node_modules\\uglify-js\\tools\\node.js"
+      },
+      {
+        "name": "async",
+        "version": "0.2.10",
+        "path": "node_modules\\uglify-js\\node_modules\\async\\lib\\async.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.5.1",
+        "path": "node_modules\\uglify-js\\node_modules\\source-map\\source-map.js"
+      },
+      {
+        "name": "uglify-to-browserify",
+        "version": "1.0.2",
+        "path": "node_modules\\uglify-js\\node_modules\\uglify-to-browserify\\index.js"
+      },
+      {
+        "name": "yargs",
+        "version": "3.5.4",
+        "path": "node_modules\\uglify-js\\node_modules\\yargs\\index.js"
+      },
+      {
+        "name": "camelcase",
+        "version": "1.2.1",
+        "path": "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\camelcase\\index.js"
+      },
+      {
+        "name": "decamelize",
+        "version": "1.0.0",
+        "path": "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\decamelize\\index.js"
+      },
+      {
+        "name": "window-size",
+        "version": "0.1.0",
+        "path": "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\window-size\\index.js"
+      },
+      {
+        "name": "wordwrap",
+        "version": "0.0.2",
+        "path": "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\wordwrap\\index.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "fixture.js",
+        "index.js",
+        "node_modules\\loophole\\lib\\loophole.js",
+        "node_modules\\uglify-js\\bin\\extract-props.js",
+        "node_modules\\uglify-js\\lib\\ast.js",
+        "node_modules\\uglify-js\\lib\\compress.js",
+        "node_modules\\uglify-js\\lib\\mozilla-ast.js",
+        "node_modules\\uglify-js\\lib\\output.js",
+        "node_modules\\uglify-js\\lib\\parse.js",
+        "node_modules\\uglify-js\\lib\\propmangle.js",
+        "node_modules\\uglify-js\\lib\\scope.js",
+        "node_modules\\uglify-js\\lib\\sourcemap.js",
+        "node_modules\\uglify-js\\lib\\transform.js",
+        "node_modules\\uglify-js\\lib\\utils.js",
+        "node_modules\\uglify-js\\node_modules\\async\\lib\\async.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\array-set.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\base64-vlq.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\base64.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\binary-search.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\mapping-list.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\quick-sort.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\source-map-consumer.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\source-map-generator.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\source-node.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\lib\\util.js",
+        "node_modules\\uglify-js\\node_modules\\source-map\\source-map.js",
+        "node_modules\\uglify-js\\node_modules\\uglify-to-browserify\\index.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\index.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\lib\\completion.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\lib\\parser.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\lib\\usage.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\lib\\validation.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\camelcase\\index.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\decamelize\\index.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\window-size\\index.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\wordwrap\\example\\center.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\wordwrap\\example\\meat.js",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\wordwrap\\index.js",
+        "node_modules\\uglify-js\\tools\\exports.js",
+        "node_modules\\uglify-js\\tools\\node.js"
+      ],
+      ".json": [
+        "node_modules\\loophole\\package.json",
+        "node_modules\\uglify-js\\node_modules\\async\\component.json",
+        "node_modules\\uglify-js\\node_modules\\async\\package.json",
+        "node_modules\\uglify-js\\node_modules\\source-map\\package.json",
+        "node_modules\\uglify-js\\node_modules\\uglify-to-browserify\\package.json",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\camelcase\\package.json",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\decamelize\\package.json",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\window-size\\package.json",
+        "node_modules\\uglify-js\\node_modules\\yargs\\node_modules\\wordwrap\\package.json",
+        "node_modules\\uglify-js\\node_modules\\yargs\\package.json",
+        "node_modules\\uglify-js\\package.json",
+        "node_modules\\uglify-js\\tools\\domprops.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          ""
+        ],
+        "dependencies": {
+          "loophole": "^1.1.0",
+          "uglify-js": "^2.5.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\uglify-js\\bin",
+          "node_modules\\uglify-js\\lib",
+          "node_modules\\uglify-js",
+          "node_modules\\uglify-js\\tools"
+        ],
+        "dependencies": {
+          "async": "~0.2.6",
+          "source-map": "~0.5.1",
+          "uglify-to-browserify": "~1.0.0",
+          "yargs": "~3.5.4"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\uglify-js\\node_modules\\yargs",
+          "node_modules\\uglify-js\\node_modules\\yargs\\lib"
+        ],
+        "dependencies": {
+          "camelcase": "^1.0.2",
+          "decamelize": "^1.0.0",
+          "window-size": "0.1.0",
+          "wordwrap": "0.0.2"
+        }
+      }
+    ]
+  }
+}
