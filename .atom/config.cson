@@ -10,6 +10,7 @@
       "archive-view"
       "background-tips"
       "image-view"
+      "spell-check"
     ]
     audioBeep: false
   editor:
@@ -24,3 +25,6 @@
   "one-dark-ui": {}
   "atom-beautify":
     _analyticsUserId: "060e9cc3-ce26-4fbf-a7d2-e2d32252dc0b"
+  "expand-region": {}
+  "find-and-replace":
+    scrollToResultOnLiveSearch: true

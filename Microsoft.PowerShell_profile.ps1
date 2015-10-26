@@ -24,6 +24,7 @@ function global:prompt {
 Pop-Location
 
 Remove-Item alias:curl
+New-Alias restart Restart-Computer
 New-Alias sco sc.exe
 New-Alias f Clear-Host
 New-Alias e explorer.exe
@@ -32,9 +33,9 @@ New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\de
 New-Alias p .\psake.ps1
 New-Alias n "C:\Program Files (x86)\Notepad++\notepad++.exe"
 New-Alias wh where.exe
-New-Alias ssh "C:\Program Files (x86)\Git\bin\ssh.exe"
-New-Alias 7z "C:\Program Files\7-Zip\7z.exe"
-New-Alias rabbitmqctl "C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.4.2\sbin\rabbitmqctl.bat"
+New-Alias ssh "C:\bin\gitbin\ssh.exe"
+New-Alias 7z "C:\Program Files (x86)\7-Zip\7z.exe"
+New-Alias rabbitmqctl "C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.5.3\sbin\rabbitmqctl.bat"
 New-Alias kdiff "C:\Program Files\KDiff3\kdiff3.exe"
 New-Alias st "C:\Program Files (x86)\Atlassian\SourceTree\SourceTree.exe"
 New-Alias json ConvertFrom-Json
@@ -43,6 +44,7 @@ New-Alias subl "C:\Program Files\Sublime Text 3\sublime_text.exe"
 New-Alias rein 'C:\bin\ReadyToIndex\ReadyToIndexMessageSender.exe'
 New-Alias down 'C:\bin\DownloadAttachments\DownloadAttachments.exe'
 New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
+New-Alias rssv Restart-Service
 
 function idea {
    & "C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 14.1.3\bin\idea.exe" $pwd
@@ -56,16 +58,11 @@ function logstash {
     rm C:\Windows\System32\config\systemprofile\.sincedb*
     rm ~\.sincedb*
 
-    logstash.bat agent --verbose -f C:\Users\vorou\code\gofra\Deployment\logstash.conf 2>&1
+    C:\Logstash\bin\logstash.bat agent --verbose -f C:\Users\vorou\code\gofra\Deployment\logstash.conf 2>&1
 }
 
 function sln {
     vs (Get-ChildItem -recurse -filter *.sln)[0].FullName
-}
-
-function Restart-Service($serviceName) {
-    Stop-Service $serviceName
-    Start-Service $serviceName
 }
 
 function xy($computerName) {
@@ -223,8 +220,43 @@ function me($command) {
 . ~\Documents\WindowsPowerShell\Change-Directory.ps1
 
 function ssh-gofra {
-  sls gofra: ~\code\gofra\Deployment\credentials.md
+  (sls gofra C:\Users\vorou\code\gofra\Deployment\credentials.md)[0].Line.Split(':')[1] | clip
   ssh gofra@zakupki.kontur.ru
 }
+
+function http-gpb($id) {
+  '{"action":"Procedure","method":"load","data":[{"procedure_id":"' + $id +'","act":null}],"type":"rpc","tid":4,"token":null}' | http post 'https://etp.gpb.ru/index.php?rpctype=direct&amp;amp;module=default' --timeout=120
+}
+
+function raw-gpb($id) {
+  $out = "C:\Users\vorou\Desktop\GPB-$id.json"
+  http-gpb $id | out-file -enc utf8 $out
+  atom $out
+}
+
+function send-notify {
+  '{"vhost":"/","name":"amq.default","properties":{"delivery_mode":1,"headers":{},"type":"DataAccess.Messaging.NotifyUsersAboutNewPurchasesMessage:Zakupki.DataAccess"},"routing_key":"DataAccess.Messaging.NotifyUsersAboutNewPurchasesMessage:Zakupki.DataAccess_NotifyUsersAboutNewPurchasesMessage","delivery_mode":"1","payload":"{}","headers":{},"props":{"type":"DataAccess.Messaging.NotifyUsersAboutNewPurchasesMessage:Zakupki.DataAccess"},"payload_encoding":"string"}' | http post http://localhost:15672/api/exchanges/%2F/amq.default/publish Authorization:'Basic Z3Vlc3Q6Z3Vlc3Q='
+}
+
+function deploy-notify {
+  p update-services -properties @{config='Debug'; services='EmailService','NewPurchasesNotificationService'}
+  send-notify
+}
+
+function logs {
+  rm c:\logs\*
+  atom c:\logs\
+}
+
+function import-dump {
+  rm -rf c:\Users\vorou\Desktop\dump
+  mkdir C:\Users\vorou\Desktop\dump
+  7z e C:\Users\vorou\Desktop\dump.7z -oC:\Users\vorou\Desktop\dump
+  Import-Module Mdbc
+  Connect-Mdbc . easynetq dump -NewCollection
+  $Database.DropCollection('dump')
+  ls ~\Desktop\dump\*message* | cat | json | Add-MdbcData
+}
+
 
 cd ~\code\gofra
