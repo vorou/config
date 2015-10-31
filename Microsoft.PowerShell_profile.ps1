@@ -4,24 +4,15 @@ Import-Module WebAdministration
 Import-Module PSReadLine
 Import-Module Mdbc
 
-# posh-git
-Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-Import-Module C:\Users\vorou\code\posh-git\posh-git.psm1
-function global:prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
+function prompt {
+    $dir = $pwd.Path.Replace("Microsoft.PowerShell.Core\FileSystem::", "");
 
-    # Reset color, which can be messed up by Enable-GitColors
-    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
+    Write-Host ("`n[$dir]") -nonewline -ForegroundColor DarkGreen
+    Write-GitStatus
+    Write-Host ""
 
-    Write-Host "* * *"
-    Write-Host($pwd.ProviderPath) -nonewline
-
-    Write-VcsStatus
-
-    $global:LASTEXITCODE = $realLASTEXITCODE
-    return "`r`n> "
+    return "$ "
 }
-Pop-Location
 
 Remove-Item alias:curl
 New-Alias restart Restart-Computer
@@ -216,8 +207,8 @@ function me($command) {
   mongo gofra2/gofra --eval $printJson
 }
 
-. ~\Documents\WindowsPowerShell\Remove-Item.ps1
-. ~\Documents\WindowsPowerShell\Change-Directory.ps1
+. ~\code\config\ps\Remove-Item.ps1
+. ~\code\config\ps\Change-Directory.ps1
 
 function ssh-gofra {
   (sls gofra C:\Users\vorou\code\gofra\Deployment\credentials.md)[0].Line.Split(':')[1] | clip
@@ -252,11 +243,7 @@ function import-dump {
   rm -rf c:\Users\vorou\Desktop\dump
   mkdir C:\Users\vorou\Desktop\dump
   7z e C:\Users\vorou\Desktop\dump.7z -oC:\Users\vorou\Desktop\dump
-  Import-Module Mdbc
   Connect-Mdbc . easynetq dump -NewCollection
   $Database.DropCollection('dump')
   ls ~\Desktop\dump\*message* | cat | json | Add-MdbcData
 }
-
-
-cd ~\code\gofra
