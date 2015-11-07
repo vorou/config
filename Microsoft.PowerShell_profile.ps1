@@ -203,7 +203,7 @@ function me($command) {
 . ~\code\config\ps\Change-Directory.ps1
 
 function ssh-gofra {
-  (sls gofra C:\Users\vorou\code\gofra\Deployment\credentials.md)[0].Line.Split(':')[1] | clip
+  (sls gofra ~\code\gofra\Deployment\credentials.md)[0].Line.Split(':')[1] | clip
   ssh gofra@zakupki.kontur.ru
 }
 
