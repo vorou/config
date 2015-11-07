@@ -258,5 +258,12 @@ function import-dump {
   ls ~\Desktop\dump\*message* | cat | json | Add-MdbcData
 }
 
+function pc {
+  p compile
+}
+
 
 cd ~\code\gofra
+
+# Load Jump-Location profile
+Import-Module 'C:\Users\vorou\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
