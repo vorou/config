@@ -1,12 +1,14 @@
 [ghfw]
 disableverification = "true"
 [user]
-name = vorou
-email = vorou@skbkontur.ru
+	name = vorou
+	email = vorou@skbkontur.ru
 [core]
 autocrlf = true
 excludesfile = "C:\\\\Users\\\\vorou\\\\.gitignore"
-editor = 'c:/program files/sublime text 3/subl.exe' -w
+# editor = atom --wait
+	editor = 'c:/program files/sublime text 3/subl.exe' -w
+pager = less
 [alias]
 a = add
 aa = add -A
@@ -18,6 +20,7 @@ back = checkout -
 bd = branch -D
 bm = branch -m
 c = !git add -A && git commit
+cf = commit --fixup
 cg = config --global
 ci = commit
 cim = commit -m
@@ -40,6 +43,7 @@ pu = push -u
 r = rebase
 ra = rebase --abort
 rc = rebase --continue
+ri = rebase --interactive
 save = !git add -A && git commit -m 'SAVEPOINT'
 sha = !git rev-parse head
 sl = stash list
@@ -53,7 +57,7 @@ requireForce = false
 [push]
 default = current
 [merge]
-tool = kdiff3
+	tool = kdiff3
 [mergetool]
 prompt = false
 keepBackup = false
@@ -62,15 +66,15 @@ cmd = \"C:\\\\Program Files\\\\KDiff3\\\\kdiff3\" $BASE $LOCAL $REMOTE -o $MERGE
 [branch]
 autosetuprebase = always
 [credential]
-helper = !'C:\\Users\\vorou\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+	helper = !'C:\\Users\\vorou\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
 [filter "hawser"]
 clean = git hawser clean %f
 smudge = git hawser smudge %f
 required = true
 [filter "lfs"]
-clean = git lfs clean %f
-smudge = git lfs smudge %f
-required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
 [difftool "sourcetree"]
 cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
@@ -79,3 +83,6 @@ trustExitCode = true
 [http]
 sslVerify = false
 sslCAinfo = /bin/curl-ca-bundle.crt
+[color]
+	ui = never
+	diff = true
