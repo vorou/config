@@ -247,3 +247,20 @@ function import-dump {
   $Database.DropCollection('dump')
   ls ~\Desktop\dump\*message* | cat | json | Add-MdbcData
 }
+
+# Load Jump-Location profile
+Import-Module 'C:\Users\vorop\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
+
+# posh-git
+Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
+Import-Module C:\Users\vorop\code\posh-git\posh-git.psm1
+function global:prompt {
+    Write-Host
+    $realLASTEXITCODE = $LASTEXITCODE
+    Write-Host($pwd.ProviderPath) -nonewline
+    Write-VcsStatus
+    $global:LASTEXITCODE = $realLASTEXITCODE
+    Write-Host
+    return "$ "
+}
+Pop-Location
