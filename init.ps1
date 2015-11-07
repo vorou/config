@@ -8,9 +8,11 @@ function mklink($link, $target, $message) {
   ""
 }
 
-function mkdlink($link, $target) {
-  rm -re -fo $link -erroraction silentlyContinue
+function mkdlink($link, $target, $message) {
+  "# $message"
+  rm -re -fo $link
   cmd /c mklink /d $link $target
+  ""
 }
 
 mklink "$home\hosts" "C:\Windows\System32\drivers\etc\hosts" "hosts"
