@@ -3,7 +3,7 @@
 Import-Module WebAdministration
 Import-Module PSReadLine
 Import-Module Mdbc
-Import-Module 'C:\Users\vorou\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
+Import-Module '~\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
 
 
 Remove-Item alias:curl
@@ -200,7 +200,6 @@ function me($command) {
 }
 
 . ~\code\config\ps\Remove-Item.ps1
-. ~\code\config\ps\Change-Directory.ps1
 
 function ssh-gofra {
   (sls gofra ~\code\gofra\Deployment\credentials.md)[0].Line.Split(':')[1] | clip
@@ -247,7 +246,7 @@ function pc {
 
 # posh-git
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-Import-Module C:\Users\vorop\code\posh-git\posh-git.psm1
+Import-Module ~\code\posh-git\posh-git.psm1
 function global:prompt {
     Write-Host
     $realLASTEXITCODE = $LASTEXITCODE
