@@ -1,5 +1,11 @@
-# base16-ocean-dark theme
+# Base16 Ocean Dark theme
 
-Base16 Ocean Dark Syntax Theme for Atom. Matches the color scheme to the Atom Syntax Generator boilerplate.
+A dark colored syntax theme for Atom.
 
-![Screenshot](http://f.cl.ly/items/152w2k1q1H210x1j2S0O/Screen%20Shot%202014-02-28%20at%2012.33.13%20PM.png)
+![Screenshot](https://raw.githubusercontent.com/GijsGoudzwaard/base16-ocean-dark/develop/screenshot.jpg)
+
+## Recommended UI
+It is recommended to use [this](https://atom.io/themes/spacegray-dark-ui) theme along with this syntax theme.
+
+## Settings
+You can turn off the UI modifications in the package settings.

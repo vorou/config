@@ -3,10 +3,11 @@
 import fs from 'fs';
 import stdPath from 'path';
 
+import fuzzaldrin from 'fuzzaldrin-plus';
 import mkdirp from 'mkdirp';
 import touch from 'touch';
 
-import {DEFAULT_ACTIVE_FILE_DIR, DEFAULT_PROJECT_ROOT} from './config';
+import * as config from './config';
 import {
     absolutify,
     cachedProperty,
@@ -36,15 +37,16 @@ export class Path {
     }
 
     @cachedProperty
+    get absolute() {
+        return absolutify(this.full);
+    }
+
+    @cachedProperty
     get stat() {
         try {
-            return fs.statSync(absolutify(this.full));
+            return fs.statSync(this.absolute);
         } catch (err) {
-            if (err.code === 'ENOENT') {
-                return null;
-            } else {
-                throw err;
-            }
+            return null;
         }
     }
 
@@ -57,11 +59,11 @@ export class Path {
     }
 
     isProjectDirectory() {
-        return atom.project.getPaths().indexOf(this.full) !== -1;
+        return atom.project.getPaths().indexOf(this.absolute) !== -1;
     }
 
     isRoot() {
-        return stdPath.dirname(this.full) === this.full;
+        return stdPath.dirname(this.absolute) === this.absolute;
     }
 
     hasCaseSensitiveFragment() {
@@ -91,7 +93,7 @@ export class Path {
      */
     root() {
         let last = null;
-        let current = this.full;
+        let current = this.absolute;
         while (current !== last) {
             last = current;
             current = stdPath.dirname(current);
@@ -104,7 +106,7 @@ export class Path {
      * Create an empty file at the given path if it doesn't already exist.
      */
     createFile() {
-        touch.sync(this.full);
+        touch.sync(this.absolute);
     }
 
     /**
@@ -113,7 +115,7 @@ export class Path {
      */
     createDirectories() {
         try {
-            mkdirp.sync(this.directory);
+            mkdirp.sync(absolutify(this.directory));
         } catch (err) {
             if (err.code !== 'ENOENT') {
                 throw err;
@@ -132,16 +134,35 @@ export class Path {
         }
 
         if (this.fragment) {
-            if (caseSensitive === null) {
-                caseSensitive = this.hasCaseSensitiveFragment();
-            }
+            if (config.get('fuzzyMatch')) {
+                filenames = fuzzaldrin.filter(filenames, this.fragment);
+            } else {
+                if (caseSensitive === null) {
+                    caseSensitive = this.hasCaseSensitiveFragment();
+                }
 
-            filenames = filenames.filter(
-                (fn) => matchFragment(this.fragment, fn, caseSensitive)
-            );
+                filenames = filenames.filter(
+                    (fn) => matchFragment(this.fragment, fn, caseSensitive)
+                );
+            }
         }
 
         return filenames.map((fn) => new Path(this.directory + fn));
+    }
+
+    /**
+     * Check if the last path fragment in this path is equal to the given
+     * shortcut string, and the path ends in a separator.
+     *
+     * For example, ':/' and '/foo/bar/:/' have the ':' shortcut, but
+     * '/foo/bar:/' and '/blah/:' do not.
+     */
+    hasShortcut(shortcut) {
+        shortcut = shortcut + this.sep;
+        return !this.fragment && (
+            this.directory.endsWith(this.sep + shortcut)
+            || this.directory === shortcut
+        )
     }
 
     equals(otherPath) {
@@ -152,19 +173,18 @@ export class Path {
      * Return the path to show initially in the path input.
      */
     static initial() {
-        switch (atom.config.get('advanced-open-file.defaultInputValue')) {
-            case DEFAULT_ACTIVE_FILE_DIR:
+        switch (config.get('defaultInputValue')) {
+            case config.DEFAULT_ACTIVE_FILE_DIR:
                 let editor = atom.workspace.getActiveTextEditor();
                 if (editor && editor.getPath()) {
                     return new Path(stdPath.dirname(editor.getPath()) + stdPath.sep);
                 }
-                break;
-            case DEFAULT_PROJECT_ROOT:
+                // No break so that we fall back to project root.
+            case config.DEFAULT_PROJECT_ROOT:
                 let projectPath = getProjectPath();
                 if (projectPath) {
                     return new Path(projectPath + stdPath.sep);
                 }
-                break;
         }
 
         return new Path('');
@@ -193,8 +213,8 @@ export class Path {
         let last = paths[paths.length - 1];
 
         let prefix = '';
-        let prefixMaxLength = Math.max(first.length, last.length);
-        for (let k = 0; k < prefixMaxLength - 1; k++) {
+        let prefixMaxLength = Math.min(first.length, last.length);
+        for (let k = 0; k < prefixMaxLength; k++) {
             if (first[k] === last[k]) {
                 prefix += first[k];
             } else if (!caseSensitive && first[k].toLowerCase() === last[k].toLowerCase()) {

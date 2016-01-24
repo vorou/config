@@ -7,7 +7,7 @@ disableverification = "true"
 autocrlf = true
 excludesfile = "C:\\\\Users\\\\vorou\\\\.gitignore"
 # editor = atom --wait
-	editor = 'c:/program files/sublime text 3/subl.exe' -w
+	# editor = 'c:/program files/sublime text 3/subl.exe' -w
 pager = less
 [alias]
 a = add

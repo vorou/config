@@ -1,5 +1,10 @@
 # Advanced Open File
 
+[![TravisCI Build Status](https://travis-ci.org/Osmose/advanced-open-file.svg)](https://travis-ci.org/Osmose/advanced-open-file)
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/cwyb7f46dd1bbuxh/branch/master?svg=true)](https://ci.appveyor.com/project/Osmose/advanced-open-file/branch/master)
+
+
+
 Advanced Open File is a package for helping Atom users to open files and folders
 easily. It can also create new files and folders if they don't exist.
 
@@ -29,10 +34,14 @@ You can also use the `Up` and `Down` arrow keys to scroll through the list, and
 `Enter` to select the currently-highlighted item.
 
 If a directory has a plus symbol on the right side of its entry, clicking the
-symbol will add it as a project directory.
+symbol will add it as a project directory. You can also add a highlighted
+directory as a project directory using `Shift-Cmd-O`/`Ctrl-Alt-O`.
 
 `Cmd-Z`/`Ctrl-Z` will undo changes made to the current path, such as
 autocompletion or directory shortcuts.
+
+You can use the keybindings for splitting panes (`Cmd-k <Arrow Key>` by default)
+to open the selected path in a new split pane in the desired direction.
 
 ## Keybindings
 
@@ -56,6 +65,21 @@ Available commands for binding:
 
   <dt><code>core:cancel</code></dt>
   <dd>Close the Advanced Open File dialog.</dd>
+
+  <dt>
+    <code>pane:split-left</code>, <code>pane:split-right</code>,
+    <code>pane:split-up</code>, and <code>pane:split-down</code>
+  </dt>
+  <dd>
+    Open the selected path (or current path in input) in a new pane split from
+    the current pane.
+  </dd>
+
+  <dt><code>application:add-project-folder</code></dt>
+  <dd>
+    If a folder path has been selected with the cursor, add it as a project
+    directory.
+  </dd>
 
   <dt><code>advanced-open-file:autocomplete</code></dt>
   <dd>Attempts to autocomplete the current input.</dd>
@@ -99,6 +123,14 @@ following to your keymap to map `Ctrl-x Ctrl-f` to toggle the dialog and
 ## Settings
 
 <dl>
+  <dt>Create directories</dt>
+  <dd>
+    Normally, when you attempt to open a path pointing to a directory that
+    doesn't exist, an error beep sounds and nothing happens. When this setting
+    is enabled, opening a non-existent directory will create it and show a
+    notification confirming the creation.
+  </dd>
+
   <dt>Create files instantly</dt>
   <dd>
     If checked, files are created immediately instead of on save if they don't
@@ -110,6 +142,15 @@ following to your keymap to map `Ctrl-x Ctrl-f` to toggle the dialog and
     Determines what the default value in the path input is when the dialog is
     opened. Possible choices are nothing, the current project's root directory,
     or the directory of the currently-active file.
+  </dd>
+
+  <dt>Use fuzzy matching for matching filenames</dt>
+  <dd>
+    Changes the method for matching filenames while typing to use a fuzzy match
+    algorithm instead of a prefix match one. When enabled, matches are sorted by
+    their match weight instead of by name and type, and autocomplete
+    automatically chooses the closest result instead of the common prefix among
+    matching filenames.
   </dd>
 
   <dt>Shortcuts for fast directory switching</dt>
@@ -135,15 +176,41 @@ following to your keymap to map `Ctrl-x Ctrl-f` to toggle the dialog and
   </dd>
 </dl>
 
-## Events
+## Event Service
 
 Other packages can subscribe to events to get notified when certain actions
-happen in advanced-open-file. To do so, you'll need to load the main module
-using `atom.package`:
+happen in advanced-open-file. To do so, you'll need to consume the
+`advanced-open-file-events` service:
+
+### `package.json`
+
+```json
+"consumedServices": {
+  "advanced-open-file-events": {
+    "versions": {
+      "0.1.0": "consumeEventService"
+    }
+  }
+}
+```
+
+### Main Module
 
 ```coffeescript
-modulePath = atom.packages.getLoadedPackage('advanced-open-file').mainModulePath
-advancedOpenFile = require(modulePath)
+{Disposable} = require 'atom'
+
+
+module.exports =
+  consumeEventService: (service) ->
+    openDisposable = service.onDidOpenPath (path) ->
+      console.log "Open: #{path}"
+
+    createDisposable = service.onDidCreatePath (path) ->
+      console.log "Create: #{path}"
+
+    return new Disposable ->
+      openDisposable.dispose()
+      createDisposable.dispose()
 ```
 
 ### `onDidOpenPath`
@@ -151,9 +218,8 @@ advancedOpenFile = require(modulePath)
 Triggered when a file is opened via advanced-open-file.
 
 ```coffeescript
-advancedOpenFile.onDidOpenPath((path) -> {
-  console.log(path)
-})
+service.onDidOpenPath (path) ->
+  console.log "Open: #{path}"
 ```
 
 ### `onDidCreatePath`
@@ -164,9 +230,8 @@ trigger when the preference is disabled and a new file is opened and then
 subsequently saved.
 
 ```coffeescript
-advancedOpenFile.onDidCreatePath((path) -> {
-  console.log(path)
-})
+service.onDidCreatePath (path) ->
+  console.log "Create: #{path}"
 ```
 
 ## Contributing

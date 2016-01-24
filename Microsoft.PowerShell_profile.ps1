@@ -17,7 +17,7 @@ New-Alias p .\psake.ps1
 New-Alias n "C:\Program Files (x86)\Notepad++\notepad++.exe"
 New-Alias wh where.exe
 New-Alias ssh "C:\bin\gitbin\ssh.exe"
-New-Alias 7z "C:\Program Files (x86)\7-Zip\7z.exe"
+New-Alias 7z "C:\Program Files\7-Zip\7z.exe"
 New-Alias rabbitmqctl "C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.5.3\sbin\rabbitmqctl.bat"
 New-Alias kdiff "C:\Program Files\KDiff3\kdiff3.exe"
 New-Alias st "C:\Program Files (x86)\Atlassian\SourceTree\SourceTree.exe"

@@ -2,6 +2,7 @@
 
 import {Emitter} from 'event-kit';
 
+import * as config from './config';
 import {Path} from './models';
 import {cachedProperty, closest, dom} from './utils';
 
@@ -22,18 +23,32 @@ export default class AdvancedOpenFileView {
         this.pathEditor.setPlaceholderText('/path/to/file.txt');
         this.pathEditor.setSoftWrapped(false);
 
+        // Update the path list whenever the path changes.
+        this.pathEditor.onDidChange(() => {
+            let newPath = new Path(this.pathEditor.getText());
+
+            this.parentDirectoryListItem.dataset.fileName = newPath.parent().full;
+
+            this.setPathList(newPath.matchingPaths(), {
+                hideParent: newPath.fragment !== '' || newPath.isRoot(),
+                sort: !(config.get('fuzzyMatch') && newPath.fragment !== ''),
+            });
+        });
+
         this.content.addEventListener('click', (ev) => {
             // Keep focus on the text input and do not propagate so that the
             // outside click handler doesn't pick up the event.
             ev.stopPropagation();
             this.pathInput.focus();
         });
+
         this.content.addEventListener('click', (ev) => {
             let listItem = ev.target::closest('.list-item');
             if (listItem !== null) {
                 this.emitter.emit('did-click-file', listItem.dataset.fileName);
             }
         });
+
         this.content.addEventListener('click', (ev) => {
             if (ev.target::closest('.add-project-folder') !== null) {
                 let listItem = ev.target::closest('.list-item');
@@ -49,7 +64,9 @@ export default class AdvancedOpenFileView {
                 <p class="info-message icon icon-file-add">
                     Enter the path for the file to open or create.
                 </p>
-                <atom-text-editor class="path-input" mini></atom-text-editor>
+                <div class="path-input-container">
+                    <atom-text-editor class="path-input" mini></atom-text-editor>
+                </div>
                 <ul class="list-group">
                     <li class="list-item parent-directory">
                         <span class="icon icon-file-directory">..</span>
@@ -102,7 +119,7 @@ export default class AdvancedOpenFileView {
         });
 
         let modal = this.content.parentNode;
-        modal.style.maxHeight = '100%';
+        modal.style.maxHeight = `${document.body.clientHeight - modal.offsetTop}px`;
         modal.style.display = 'flex';
         modal.style.flexDirection = 'column';
 
@@ -164,16 +181,17 @@ export default class AdvancedOpenFileView {
         this.pathEditor.setText(path.full);
         this.pathEditor.scrollToCursorPosition();
 
-        this.parentDirectoryListItem.dataset.fileName = path.parent().full;
-
         this._updatingPath = false;
     }
 
     forEachListItem(selector, callback) {
-        Array.from(this.pathList.querySelectorAll(selector)).forEach(callback);
+        let listItems = this.pathList.querySelectorAll(selector);
+        for (let k = 0; k < listItems.length; k++) {
+            callback(listItems[k]);
+        }
     }
 
-    setPathList(paths, hideParent=false) {
+    setPathList(paths, {hideParent=false, sort=true}={}) {
         this.cursorIndex = null;
 
         this.forEachListItem('.list-item.selected', (listItem) => {
@@ -191,21 +209,24 @@ export default class AdvancedOpenFileView {
         }
 
         if (paths.length > 0) {
-            // Split list into directories and files and sort them.
-            paths = paths.sort(Path.compare);
-            let directoryPaths = paths.filter((path) => path.isDirectory());
-            let filePaths = paths.filter((path) => path.isFile());
-
-            for (path of directoryPaths) {
-                if (path.exists()) {
-                    this.pathList.appendChild(dom(this.createPathListItem(path)));
-                }
+            if (sort) {
+                // Split list into directories and files and sort them.
+                paths = paths.sort(Path.compare);
+                let directoryPaths = paths.filter((path) => path.isDirectory());
+                let filePaths = paths.filter((path) => path.isFile());
+                this._appendToPathList(directoryPaths);
+                this._appendToPathList(filePaths);
+            } else {
+                this._appendToPathList(paths);
             }
+        }
+    }
 
-            for (path of filePaths) {
-                if (path.exists()) {
-                    this.pathList.appendChild(dom(this.createPathListItem(path)));
-                }
+    _appendToPathList(paths) {
+        for (path of paths) {
+            if (path.exists()) {
+                let listItem = dom(this.createPathListItem(path));
+                this.pathList.appendChild(listItem);
             }
         }
     }
@@ -223,7 +244,19 @@ export default class AdvancedOpenFileView {
         if (this.cursorIndex !== null) {
             let listItems = this.pathList.querySelectorAll('.list-item:not(.hidden)');
             if (listItems.length > index) {
-                listItems[index].classList.add('selected');
+                let selected = listItems[index];
+                selected.classList.add('selected');
+
+                // If the selected element is out of view, scroll it into view.
+                let parentElement = selected.parentElement;
+                let selectedTop = selected.offsetTop;
+                let parentScrollBottom = parentElement.scrollTop + parentElement.clientHeight;
+                if (selectedTop < parentElement.scrollTop) {
+                    parentElement.scrollTop = selectedTop;
+                } else if (selectedTop >= parentScrollBottom) {
+                    let selectedBottom = selectedTop + selected.clientHeight;
+                    parentElement.scrollTop += selectedBottom - parentScrollBottom;
+                }
             }
         }
     }

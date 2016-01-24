@@ -407,7 +407,7 @@ Determines whether comments should be indented. (Supported by Pretty Diff)
 
 **Description**:
 
-if indentation should be forcefully applied tomarkup even if it disruptively adds unintended whitespace to the documents rendered output (Supported by Pretty Diff)
+if indentation should be forcefully applied to markup even if it disruptively adds unintended whitespace to the documents rendered output (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -491,6 +491,58 @@ If in CSS values leading 0s immediately preceeding a decimal should be removed o
 {
     "css": {
         "no_lead_zero": false
+    }
+}
+```
+
+####  [CSS - comb custom config file](#css---comb-custom-config-file) 
+
+**Namespace**: `css`
+
+**Key**: `configPath`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "configPath": ""
+    }
+}
+```
+
+####  [CSS - comb predefined config](#css---comb-predefined-config) 
+
+**Namespace**: `css`
+
+**Key**: `predefinedConfig`
+
+**Default**: `csscomb`
+
+**Type**: `string`
+
+**Enum**:  `csscomb`  `yandex`  `zen` 
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Used if neither a project or custom config file exists. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "predefinedConfig": "csscomb"
     }
 }
 ```
@@ -889,7 +941,7 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 
 **Key**: `unformatted`
 
-**Default**: `a,sub,sup,b,i,u`
+**Default**: `a,span,img,bdo,em,strong,dfn,code,samp,kbd,var,cite,abbr,acronym,q,sub,sup,tt,i,b,big,small,u,s,strike,font,ins,del,pre,address,dt,h1,h2,h3,h4,h5,h6`
 
 **Type**: `array`
 
@@ -906,11 +958,42 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
     "html": {
         "unformatted": [
             "a",
+            "span",
+            "img",
+            "bdo",
+            "em",
+            "strong",
+            "dfn",
+            "code",
+            "samp",
+            "kbd",
+            "var",
+            "cite",
+            "abbr",
+            "acronym",
+            "q",
             "sub",
             "sup",
-            "b",
+            "tt",
             "i",
-            "u"
+            "b",
+            "big",
+            "small",
+            "u",
+            "s",
+            "strike",
+            "font",
+            "ins",
+            "del",
+            "pre",
+            "address",
+            "dt",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
         ]
     }
 }
@@ -1254,11 +1337,11 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Break chained method calls across subsequent lines (Supported by JS Beautify)
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -1688,6 +1771,30 @@ do not fix these errors/warnings (Supported by autopep8)
 }
 ```
 
+####  [Python - Sort imports](#python---sort-imports) 
+
+**Namespace**: `python`
+
+**Key**: `sort_imports`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`autopep8`](#autopep8) 
+
+**Description**:
+
+sort imports (requires isort installed) (Supported by autopep8)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "python": {
+        "sort_imports": false
+    }
+}
+```
+
 ####  [Ruby - Indent size](#ruby---indent-size) 
 
 **Namespace**: `ruby`
@@ -1710,6 +1817,30 @@ Indentation size/length (Supported by Rubocop, Ruby Beautify)
 {
     "ruby": {
         "indent_size": 4
+    }
+}
+```
+
+####  [Ruby - Rubocop Path](#ruby---rubocop-path) 
+
+**Namespace**: `ruby`
+
+**Key**: `rubocop_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Rubocop`](#rubocop) 
+
+**Description**:
+
+Path to the `rubocop` CLI executable (Supported by Rubocop)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "ruby": {
+        "rubocop_path": ""
     }
 }
 ```
@@ -2007,7 +2138,7 @@ Disable C Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `clang-format` 
 
 **Description**:
 
@@ -2117,7 +2248,7 @@ Disable C++ Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `clang-format` 
 
 **Description**:
 
@@ -2366,6 +2497,61 @@ Automatically beautify EJS files on save
 *Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - EJS - Beautify On Save*" and change it to your desired configuration.
+
+####  [Language Config - Elm - Disable Beautifying Language](#language-config---elm---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Elm Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Elm - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Elm - Default Beautifier](#language-config---elm---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `elm-format`
+
+**Type**: `string`
+
+**Enum**:  `elm-format` 
+
+**Description**:
+
+Default Beautifier to be used for Elm
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Elm - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Elm - Beautify On Save](#language-config---elm---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Elm files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Elm - Beautify On Save*" and change it to your desired configuration.
 
 ####  [Language Config - ERB - Disable Beautifying Language](#language-config---erb---disable-beautifying-language) 
 
@@ -2641,6 +2827,61 @@ Automatically beautify Handlebars files on save
 *Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - Handlebars - Beautify On Save*" and change it to your desired configuration.
+
+####  [Language Config - Haskell - Disable Beautifying Language](#language-config---haskell---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Haskell Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Haskell - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Haskell - Default Beautifier](#language-config---haskell---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `stylish-haskell`
+
+**Type**: `string`
+
+**Enum**:  `stylish-haskell` 
+
+**Description**:
+
+Default Beautifier to be used for Haskell
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Haskell - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Haskell - Beautify On Save](#language-config---haskell---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Haskell files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Haskell - Beautify On Save*" and change it to your desired configuration.
 
 ####  [Language Config - HTML - Disable Beautifying Language](#language-config---html---disable-beautifying-language) 
 
@@ -3162,7 +3403,7 @@ Disable Objective-C Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `clang-format` 
 
 **Description**:
 
@@ -3437,7 +3678,7 @@ Disable Python Beautification
 
 **Type**: `string`
 
-**Enum**:  `autopep8` 
+**Enum**:  `autopep8`  `yapf` 
 
 **Description**:
 
@@ -4883,7 +5124,7 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 
 **Key**: `unformatted`
 
-**Default**: `a,sub,sup,b,i,u`
+**Default**: `a,span,img,bdo,em,strong,dfn,code,samp,kbd,var,cite,abbr,acronym,q,sub,sup,tt,i,b,big,small,u,s,strike,font,ins,del,pre,address,dt,h1,h2,h3,h4,h5,h6`
 
 **Type**: `array`
 
@@ -4900,11 +5141,42 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
     "html": {
         "unformatted": [
             "a",
+            "span",
+            "img",
+            "bdo",
+            "em",
+            "strong",
+            "dfn",
+            "code",
+            "samp",
+            "kbd",
+            "var",
+            "cite",
+            "abbr",
+            "acronym",
+            "q",
             "sub",
             "sup",
-            "b",
+            "tt",
             "i",
-            "u"
+            "b",
+            "big",
+            "small",
+            "u",
+            "s",
+            "strike",
+            "font",
+            "ins",
+            "del",
+            "pre",
+            "address",
+            "dt",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
         ]
     }
 }
@@ -5224,11 +5496,11 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Break chained method calls across subsequent lines (Supported by JS Beautify)
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5599,7 +5871,7 @@ Determines whether comments should be indented. (Supported by Pretty Diff)
 
 **Description**:
 
-if indentation should be forcefully applied tomarkup even if it disruptively adds unintended whitespace to the documents rendered output (Supported by Pretty Diff)
+if indentation should be forcefully applied to markup even if it disruptively adds unintended whitespace to the documents rendered output (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5893,6 +6165,30 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 }
 ```
 
+####  [JavaScript - Break chained methods](#javascript---break-chained-methods) 
+
+**Namespace**: `js`
+
+**Key**: `break_chained_methods`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "break_chained_methods": false
+    }
+}
+```
+
 ####  [JavaScript - Wrap line length](#javascript---wrap-line-length) 
 
 **Namespace**: `js`
@@ -5937,6 +6233,61 @@ If a terminating comma should be inserted into arrays, object literals, and dest
 {
     "js": {
         "end_with_comma": false
+    }
+}
+```
+
+
+### CSScomb
+
+####  [CSS - comb custom config file](#css---comb-custom-config-file) 
+
+**Namespace**: `css`
+
+**Key**: `configPath`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "configPath": ""
+    }
+}
+```
+
+####  [CSS - comb predefined config](#css---comb-predefined-config) 
+
+**Namespace**: `css`
+
+**Key**: `predefinedConfig`
+
+**Default**: `csscomb`
+
+**Type**: `string`
+
+**Enum**:  `csscomb`  `yandex`  `zen` 
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Used if neither a project or custom config file exists. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "predefinedConfig": "csscomb"
     }
 }
 ```
@@ -6232,6 +6583,30 @@ do not fix these errors/warnings (Supported by autopep8)
 }
 ```
 
+####  [Python - Sort imports](#python---sort-imports) 
+
+**Namespace**: `python`
+
+**Key**: `sort_imports`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`autopep8`](#autopep8) 
+
+**Description**:
+
+sort imports (requires isort installed) (Supported by autopep8)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "python": {
+        "sort_imports": false
+    }
+}
+```
+
 
 ### Rubocop
 
@@ -6257,6 +6632,30 @@ Indentation size/length (Supported by Rubocop, Ruby Beautify)
 {
     "ruby": {
         "indent_size": 4
+    }
+}
+```
+
+####  [Ruby - Rubocop Path](#ruby---rubocop-path) 
+
+**Namespace**: `ruby`
+
+**Key**: `rubocop_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Rubocop`](#rubocop) 
+
+**Description**:
+
+Path to the `rubocop` CLI executable (Supported by Rubocop)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "ruby": {
+        "rubocop_path": ""
     }
 }
 ```

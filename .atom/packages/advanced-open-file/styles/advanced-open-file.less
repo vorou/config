@@ -1,6 +1,8 @@
 .advanced-open-file {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
 
     .hidden {
         display: none;
@@ -16,8 +18,9 @@
         margin-bottom: 0.75em;
     }
 
-    atom-text-editor {
+    .path-input-container {
         flex: 0 0 2.3em;
+        margin: 0 1px 0.75em;
     }
 
     .list-group {
@@ -54,6 +57,10 @@
 
         &:hover {
             background: @background-color-highlight;
+        }
+
+        &.iffy {
+            color: @text-color-subtle;
         }
     }
 }

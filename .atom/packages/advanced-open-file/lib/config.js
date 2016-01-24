@@ -5,7 +5,19 @@ export const DEFAULT_PROJECT_ROOT = 'Project root';
 export const DEFAULT_EMPTY = 'Empty';
 
 
+export function get(key) {
+    return atom.config.get(`advanced-open-file.${key}`);
+}
+
+
 export let config = {
+    createDirectories: {
+        title: 'Create directories',
+        description: `When opening a path to a directory that doesn't
+                      exist, create the directory instead of beeping.`,
+        type: 'boolean',
+        default: false,
+    },
     createFileInstantly: {
         title: 'Create files instantly',
         description: `When opening files that don't exist, create them
@@ -27,4 +39,11 @@ export let config = {
         enum: [DEFAULT_ACTIVE_FILE_DIR, DEFAULT_PROJECT_ROOT, DEFAULT_EMPTY],
         default: DEFAULT_ACTIVE_FILE_DIR,
     },
+    fuzzyMatch: {
+        title: 'Use fuzzy matching for matching filenames',
+        description: `Replaces default prefix-based matching. See README for
+                      details.`,
+        type: 'boolean',
+        default: false,
+    }
 };

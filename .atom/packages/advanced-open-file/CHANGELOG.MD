@@ -1,3 +1,63 @@
+0.14.1 (December 29, 2015)
+==========================
+
+* Fix issue where opening a path immediately after autocompleting it opened the
+  pre-autocomplete path instead of the full path.
+
+
+0.14.0 (December 26, 2015)
+==========================
+
+* #82: Add shortcuts for opening files in new split panes.
+* #57: Add setting for fuzzy filename matching.
+* #84: Cursor no longer resets to the end of the path when typing in the middle
+  of the path.
+* #81: Fix project root shortcut when path input is otherwise empty.
+* #80: Fall back to project root as initial path when the active editor doesn't
+  have a path, such as the settings pane.
+* #79: Fix gap below cursor in the textbox and cut-off shadows on the sides.
+
+
+0.13.0 (November 29, 2015)
+==========================
+
+* Ignore all errors when running stat on files and treat them as if they don't
+  exist. Previously only ENOENT errors were ignored.
+* Fix bug in path shortcuts where they were being applied even if a path
+  separator wasn't before the shortcut itself.
+* #63: Implement event handler API as a versioned service for other packages.
+* #60: Treat "~/" at the start of a path as the user's home directory if fast
+  directory switching is turned off.
+* #70: Add setting for enabling directory creation from the open dialog.
+* #61: Add keyboard shortcut for adding project directories.
+* #72: Determine modal max height programmatically for themes that place modals
+  at odd positions.
+
+
+0.12.3 (November 14, 2015)
+==========================
+
+* #69: Fix bug with autocomplete where we calculated the wrong bounds while
+  finding the common prefix between two paths.
+* #71: Re-add scrolling the file list when moving the cursor to an item that
+  isn't currently visible.
+
+
+0.12.2 (November 9, 2015)
+=========================
+
+* #67: Absolutify relative paths before attempting to create them.
+* #66: Make autocomplete case-insensitive unless there is a capital letter in
+  the path fragment. This makes it consistent with how the file listing behaves.
+
+
+0.12.1 (November 9, 2015)
+=========================
+
+* #68: Removed Babel polyfill because it breaks other packages due to it's
+  global polyfilling.
+
+
 0.12.0 (November 6, 2015)
 =========================
 
@@ -8,6 +68,10 @@
 * As part of rewrite, changed path separator behavior to detect which slash to
   use based on the existing path, e.g. `/foo/bar` uses `/`, while `\baz\biff`
   uses `\`.
+* Removed the `Case-sensitive auto-completion` preference. Now auto-completion
+  is always case-sensitive, and matching for the file listing is
+  case-insensitive unless the current fragment contains a capital letter, in
+  which case it becomes case-sensitive.
 
 
 0.11.0 (October 5, 2015)
