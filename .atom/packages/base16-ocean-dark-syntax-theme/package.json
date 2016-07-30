@@ -1,7 +1,7 @@
 {
   "name": "base16-ocean-dark-syntax-theme",
   "theme": "syntax",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "The base16 Ocean Dark Theme",
   "repository": {
     "type": "git",
@@ -24,10 +24,10 @@
   },
   "readme": "# base16-ocean-dark-syntax-theme\n\nBase16 ocean dark syntax theme for Atom editor.\n\nAdjusted and tested for Java, Sass, Less, JavaScript, CoffeeScript, Markdown.\n\nAlso change the color of git status and bracket matcher to match theme.\n\n## Screenshots\n\n- Java\n\n    ![java screenshot](https://raw.github.com/anson0370/base16-ocean-dark-syntax-theme/master/screenshots/java-highlight.png)\n\n- CoffeeScript\n\n    ![coffee screenshot](https://raw.github.com/anson0370/base16-ocean-dark-syntax-theme/master/screenshots/coffee-highlight.png)\n\n- Scss\n\n    ![scss screenshot](https://raw.github.com/anson0370/base16-ocean-dark-syntax-theme/master/screenshots/sass-highlight.png)\n",
   "readmeFilename": "README.md",
-  "_id": "base16-ocean-dark-syntax-theme@0.1.7",
-  "_shasum": "8556d0b300cf806bb41b0a7699f185ddcba25250",
-  "_resolved": "file:..\\d-11605-17608-11n8t00\\package.tgz",
-  "_from": "..\\d-11605-17608-11n8t00\\package.tgz",
+  "_id": "base16-ocean-dark-syntax-theme@0.1.8",
+  "_shasum": "10b419545ac975ad3a02894c018ec0188280b39c",
+  "_resolved": "file:..\\d-116028-15924-1eiyxft\\package.tgz",
+  "_from": "..\\d-116028-15924-1eiyxft\\package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [],

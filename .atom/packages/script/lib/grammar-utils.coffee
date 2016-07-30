@@ -25,18 +25,18 @@ module.exports =
 
       tempFilePath
     catch error
-      throw "Error while creating temporary file (#{error})"
+      throw ("Error while creating temporary file (#{error})")
 
   # Public: Delete all temporary files and the directory created by {GrammarUtils::createTempFileWithCode}
   deleteTempFiles: ->
     try
       if (fs.existsSync(@tempFilesDir))
-        files = fs.readdirSync(@tempFilesDir);
+        files = fs.readdirSync(@tempFilesDir)
         if (files.length)
           files.forEach((file, index) => fs.unlinkSync(@tempFilesDir + path.sep + file))
         fs.rmdirSync(@tempFilesDir)
     catch error
-      throw "Error while deleting temporary files (#{error})"
+      throw ("Error while deleting temporary files (#{error})")
 
   # Public: Get the Lisp helper object
   #
@@ -47,12 +47,17 @@ module.exports =
   #
   # Returns an {Object} which assists in writing OS dependent code.
   OperatingSystem: require './grammar-utils/operating-system'
-  
+
   # Public: Get the R helper object
   #
   # Returns an {Object} which assists in creating temp files containing R code
   R: require './grammar-utils/R'
-  
+
+  # Public: Get the Perl helper object
+  #
+  # Returns an {Object} which assists in creating temp files containing Perl code
+  Perl: require './grammar-utils/perl'
+
   # Public: Get the PHP helper object
   #
   # Returns an {Object} which assists in creating temp files containing PHP code

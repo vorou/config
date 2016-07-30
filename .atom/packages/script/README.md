@@ -12,13 +12,14 @@ Run scripts based on file name, a selection of code, or by line number.
 
 Currently supported grammars are:
 
-  * 1C (BSL)
+  * 1C (BSL) <sup>[Ø](#o-stroke)</sup>
   * AppleScript
   * Bash <sup>[**](#double-asterisk)</sup>
   * Behat Feature
   * C <sup>[*](#asterisk)</sup><sup>[‡](#double-dagger)</sup>
   * C++ <sup>[*](#asterisk)</sup><sup>[‡](#double-dagger)</sup>
   * C# Script <sup>[*](#asterisk)</sup>
+  * Clojure (via Leiningen) <sup>[ϖ](#pi)</sup>
   * Coffeescript
   * CoffeeScript (Literate) <sup>[^](#caret)</sup>
   * Crystal
@@ -74,12 +75,15 @@ Currently supported grammars are:
   * Dart
   * Octave
   * Zsh <sup>[**](#double-asterisk)</sup>
+  * Prolog <sup>[¢](#cents)</sup>
 
 **NOTE**: Some grammars may require you to install [a custom language package](https://atom.io/search?utf8=✓&q=language).
 
 You only have to add a few lines in a PR to support another.
 
 ### Limitations
+
+<a name="o-stroke"></a><sup>Ø</sup> 1C (BSL) code runs through [OneScript](http://oscript.io/) interpreter in console mode.
 
 <a name="caret"></a><sup>^</sup> Running selections of code for CoffeeScript (Literate) only works when selecting just the code blocks
 
@@ -88,6 +92,8 @@ You only have to add a few lines in a PR to support another.
 <a name="asterisk"></a><sup>*</sup> Cucumber (Gherkin), D, Go, F#, Literate Haskell, OCaml, PowerShell, and Swift do not support selection based runs
 
 <a name="omega"></a><sup>⍵</sup> Lisp selection based runs are limited to single line
+
+<a name="pi"></a><sup>ϖ</sup> Clojure scripts are executed via [Leiningen](http://leiningen.org/)'s [exec](https://github.com/kumarshantanu/lein-exec) plugin. Both `Leiningen` and `exec` must be installed
 
 <a name="double-dagger"></a><sup>‡</sup> C, C++, Objective-C, and Objective-C++ are currently only available for Mac OS X (where `process.platform is 'darwin'`). This is possible due to the commands `xcrun clang` and `xcrun clang++`. **NOTE**: Xcode and the Xcode command line tools are required to ensure `xcrun` and the correct compilers on your system.
 
@@ -104,6 +110,8 @@ can be set in the process environment or in Atom's `init.coffee` script:
 <a name="double-asterisk"></a><sup>\**</sup> The shell used is based on your default `$SHELL` environment variable.
 
 <a name="triple-asterisk"></a><sup>\***</sup> Windows users should manually add jdk path (...\jdk1.x.x_xx\bin) to their system environment variables.
+
+<a name="cents"></a><sup>¢</sup> Prolog scripts must contain a rule with the head `main` (e.g.`main:- parent(X,lucas),writeln(X).`). The script is executed with the goal `main` and is halted after the first result is found. The output is produced by the `writeln/1` predicates. It requires swipl.
 
 ## Installation
 
@@ -135,7 +143,11 @@ Make sure to run `atom` from the command line to get full access to your environ
 
 **Script: Run by Line Number** to run using the specified line number. **Note** that if you select an entire line this number could be off by one due to the way Atom detects numbers while text is selected.
 
-**Script: Run Options** should be used to configure command options, program arguments, and environment variables overrides. Environment variables may be input into the options view in the form `VARIABLE_NAME_ONE=value;VARIABLE_NAME_TWO="other value";VARIABLE_NAME_3='test'`
+**Script: Run Options** should be used to configure command options, program arguments, and environment variables overrides. Environment variables may be input into the options view in the form `VARIABLE_NAME_ONE=value;VARIABLE_NAME_TWO="other value";VARIABLE_NAME_3='test'`.
+
+Also, in this dialog you can save options as a profile for future use. For example, you can add two profiles, one for `python2.7` and another for `python3` and run scripts with a specified profile, which will be more convinient than entering options every time you want to switch python versions.
+
+**Script: Run with profile** allows you to run scripts with saved profiles. Profiles can be added in **Script: Run Options** dialog.
 
 **Script: Kill Process** will kill the process but leaves the pane open.
 
@@ -154,6 +166,7 @@ clipboard, allowing you to paste it into the editor.
 | Script: Run                | <kbd>cmd-i</kbd>                    | <kbd>shift-ctrl-b</kbd>     | If text is selected a "Selection Based" is used instead of a "File Based" run |
 | Script: Run by Line Number | <kbd>shift-cmd-j</kbd>              | <kbd>shift-ctrl-j</kbd>     | If text is selected the line number will be the last                          |
 | Script: Run Options        | <kbd>shift-cmd-i</kbd>              | <kbd>shift-ctrl-alt-o</kbd> | Runs the selection or whole file with the given options                       |
+| Script: Run with profile   | <kbd>shift-cmd-k</kbd>              | <kbd>shift-ctrl-alt-b</kbd> | Runs the selection or whole file with the specified profile                   |
 | Script: Close View         | <kbd>esc</kbd> or <kbd>ctrl-w</kbd> | <kbd>esc</kbd>              | Closes the script view window                                                 |
 | Script: Kill Process       | <kbd>ctrl-c</kbd>                   | <kbd>ctrl-q</kbd>           | Kills the current script process                                              |
 

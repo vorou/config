@@ -3,7 +3,8 @@
 Import-Module WebAdministration
 Import-Module PSReadLine
 Import-Module Mdbc
-Import-Module '~\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
+Import-Module ZLocation
+# Import-Module '~\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
 
 
 Remove-Item alias:curl
@@ -16,9 +17,9 @@ New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\de
 New-Alias p .\psake.ps1
 New-Alias n "C:\Program Files (x86)\Notepad++\notepad++.exe"
 New-Alias wh where.exe
-New-Alias ssh "C:\bin\gitbin\ssh.exe"
+#New-Alias ssh "C:\bin\gitbin\ssh.exe"
 New-Alias 7z "C:\Program Files\7-Zip\7z.exe"
-New-Alias rabbitmqctl "C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.5.3\sbin\rabbitmqctl.bat"
+New-Alias rabbitmqctl "C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.5.4\sbin\rabbitmqctl.bat"
 New-Alias kdiff "C:\Program Files\KDiff3\kdiff3.exe"
 New-Alias st "C:\Program Files (x86)\Atlassian\SourceTree\SourceTree.exe"
 New-Alias json ConvertFrom-Json
@@ -28,6 +29,7 @@ New-Alias rein 'C:\bin\ReadyToIndex\ReadyToIndexMessageSender.exe'
 New-Alias down 'C:\bin\DownloadAttachments\DownloadAttachments.exe'
 New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 New-Alias rssv Restart-Service
+New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
 
 function idea {
    & "C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 14.1.3\bin\idea.exe" $pwd
@@ -45,7 +47,7 @@ function logstash {
 }
 
 function sln {
-    vs (Get-ChildItem -recurse -filter *.sln)[0].FullName
+    vs (ls -re *sln | ? {$_.FullName -notmatch 'node'})[0].FullName
 }
 
 function xy($computerName) {
@@ -236,13 +238,23 @@ function import-dump {
   7z e C:\Users\vorou\Desktop\dump.7z -oC:\Users\vorou\Desktop\dump
   Connect-Mdbc . easynetq dump -NewCollection
   $Database.DropCollection('dump')
-  ls ~\Desktop\dump\*message* | cat | json | Add-MdbcData
+  ls -re ~\Desktop\dump\*message* | %{$msg = cat $_ | json; $msg | add-member -Name 'Source' -Value $_.FullName,$_.FullName.replace('message','info'),$_.FullName.replace('message','properties') -MemberType NoteProperty; $msg | Add-MdbcData}
 }
 
 function pc {
   p compile
 }
 
+function lq {
+  cat C:\elasticsearch\logs\*_index_search_slowlog.log -enc utf8 | select -last 1 | %{$_ -match 'source\[(.*)\], extra_source'} | %{$Matches[1]}
+}
+
+function ll($log, $comp) {
+  if(!($comp)) {
+    $comp = hostname
+  }  
+	ls "\\$comp\c$\logs\*$log*" | sort lastwritetime | select -last 1 | %{n $_}
+}
 
 # posh-git
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
@@ -257,3 +269,8 @@ function global:prompt {
     return "$ "
 }
 Pop-Location
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}

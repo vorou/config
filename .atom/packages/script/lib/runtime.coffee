@@ -31,7 +31,7 @@ class Runtime
   destroy: ->
     @stop()
     @runner.destroy()
-    _.each @observers, (observer) => observer.destroy()
+    _.each @observers, (observer) -> observer.destroy()
     @emitter.dispose()
     @codeContextBuilder.destroy()
 
@@ -42,7 +42,7 @@ class Runtime
   # * "Line Number Based"
   # * "File Based"
   # input (Optional) - {String} that'll be provided to the `stdin` of the new process
-  execute: (argType = "Selection Based", input = null) ->
+  execute: (argType = "Selection Based", input = null, options = null) ->
     @stop() if atom.config.get 'script.stopOnRerun'
     @emitter.emit 'start'
 
@@ -52,7 +52,8 @@ class Runtime
     # of the grammar map, using the options runner
     return unless codeContext.lang?
 
-    commandContext = CommandContext.build(@, @scriptOptions, codeContext)
+    executionOptions = if options then options else @scriptOptions
+    commandContext = CommandContext.build(@, executionOptions, codeContext)
 
     return unless commandContext
 
@@ -61,8 +62,9 @@ class Runtime
       filename: codeContext.filename
       lineNumber: codeContext.lineNumber
 
+    @runner.scriptOptions = executionOptions
     @runner.run(commandContext.command, commandContext.args, codeContext, input)
-    @emitter.emit 'started'
+    @emitter.emit 'started', commandContext
 
   # Public: stops execution of the current fork
   stop: ->

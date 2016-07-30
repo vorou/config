@@ -51,6 +51,14 @@ module.exports =
       command: "scriptcs"
       args: (context) -> ['-script', context.filepath]
 
+  Clojure:
+    "Selection Based":
+      command: "lein"
+      args: (context)  -> ['exec', '-e', context.getCode()]
+    "File Based":
+      command: "lein"
+      args: (context) -> ['exec', context.filepath]
+
   CoffeeScript:
     "Selection Based":
       command: "coffee"
@@ -59,12 +67,12 @@ module.exports =
       command: "coffee"
       args: (context) -> [context.filepath]
 
-  'CoffeeScript (Literate)':
-    "Selection Based":
-      command: "coffee"
+  "CoffeeScript (Literate)":
+    'Selection Based':
+      command: 'coffee'
       args: (context) -> GrammarUtils.CScompiler.args.concat [context.getCode()]
-    "File Based":
-      command: "coffee"
+    'File Based':
+      command: 'coffee'
       args: (context) -> [context.filepath]
 
   Crystal:
@@ -343,7 +351,10 @@ module.exports =
   Perl:
     "Selection Based":
       command: "perl"
-      args: (context)  -> ['-e', context.getCode()]
+      args: (context) ->
+        code = context.getCode()
+        file = GrammarUtils.Perl.createTempFileWithCode(code)
+        [file]
     "File Based":
       command: "perl"
       args: (context) -> [context.filepath]
@@ -548,3 +559,8 @@ module.exports =
     "File Based":
       command: "octave"
       args: (context) -> ['-p', context.filepath.replace(/[^\/]*$/, ''), context.filepath]
+
+  Prolog:
+    "File Based":
+      command: "swipl"
+      args: (context) -> ['-f', context.filepath, '-t', 'main', '--quiet']
