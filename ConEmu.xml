@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2016-04-06 11:50:05" build="160207">
+		<key name=".Vanilla" modified="2016-07-30 10:20:48" build="160724">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -770,7 +770,7 @@
 			<value name="StartCreateDelay" type="ulong" data="100"/>
 			<value name="DefaultTerminalDebugLog" type="hex" data="00"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
-			<value name="LastMonitor" type="string" data="78,0,1920,1080"/>
+			<value name="LastMonitor" type="string" data="62,0,1366,768"/>
 			<value name="ProcessCtrlZ" type="hex" data="00"/>
 			<value name="SuppressBells" type="hex" data="01"/>
 			<value name="Anti-aliasing2" type="hex" data="00"/>

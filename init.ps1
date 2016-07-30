@@ -33,3 +33,8 @@ mkdlink "$home\AppData\Roaming\Sublime Text 3\Packages\User" "$config\sublime-3-
 mklink "$home\documents\visual studio 2015\settings\CurrentSettings.vssettings" "$config\CurrentSettings.vssettings" "VS"
 
 mklink "$home\AppData\Roaming\JetBrains\Shared\vAny\GlobalSettingsStorage.DotSettings" "$config\GlobalSettingsStorage.DotSettings" "R#"
+
+Install-Module ZLocation -Scope CurrentUser
+
+cd ~\code
+git clone https://github.com/dahlbyk/posh-git.git
