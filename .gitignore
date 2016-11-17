@@ -231,3 +231,5 @@ Source/Gofra.sln.vsext
 sublime-3-packages-user/FileHistory*
 sublime-3-packages-user/Package Control.last-run
 .atom/.apm/.apmrc
+
+.vs

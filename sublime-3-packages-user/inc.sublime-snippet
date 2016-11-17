@@ -1,7 +1,0 @@
-<snippet>
-  <content><![CDATA[
-#include <$1>
-]]></content>
-  <tabTrigger>inc</tabTrigger>
-  <scope>source.c++</scope>
-</snippet>

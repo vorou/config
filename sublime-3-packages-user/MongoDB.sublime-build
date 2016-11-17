@@ -1,5 +1,0 @@
-{
-  "selector": "source.js",
-  "shell":true,
-  "cmd": ["'c:\\Program Files\\MongoDB\\Server\\3.0\\bin\\mongo.exe' < $file"]
-}

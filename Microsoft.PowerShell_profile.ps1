@@ -2,7 +2,7 @@
 
 Import-Module WebAdministration
 Import-Module PSReadLine
-Import-Module Mdbc
+# Import-Module Mdbc
 Import-Module ZLocation
 # Import-Module '~\Documents\WindowsPowerShell\Modules\Jump.Location\Jump.Location.psd1'
 
@@ -15,7 +15,6 @@ New-Alias e explorer.exe
 New-Alias rap "C:\Program Files\Rapid Environment Editor\RapidEE.exe"
 New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
 New-Alias p .\psake.ps1
-New-Alias n "C:\Program Files (x86)\Notepad++\notepad++.exe"
 New-Alias wh where.exe
 #New-Alias ssh "C:\bin\gitbin\ssh.exe"
 New-Alias 7z "C:\Program Files\7-Zip\7z.exe"
@@ -30,6 +29,10 @@ New-Alias down 'C:\bin\DownloadAttachments\DownloadAttachments.exe'
 New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 New-Alias rssv Restart-Service
 New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
+New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
+New-Alias cl "C:\Users\vorou\code\elba\clear_logs.bat"
+New-Alias msbuild15 "C:\Program Files (x86)\Microsoft Visual Studio\VS15Preview\MSBuild\15.0\Bin\MSBuild.exe"
+New-Alias ba "C:\Users\vorou\ba.bat"
 
 function idea {
    & "C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 14.1.3\bin\idea.exe" $pwd
@@ -47,7 +50,12 @@ function logstash {
 }
 
 function sln {
-    vs (ls -re *sln | ? {$_.FullName -notmatch 'node'})[0].FullName
+    if (test-path 'sln') {
+      cat sln | %{vs $_}
+    } 
+    else {
+      vs (ls -re *sln | ? {$_.FullName -notmatch 'node'})[0].FullName
+    }
 }
 
 function xy($computerName) {
@@ -256,14 +264,60 @@ function ll($log, $comp) {
 	ls "\\$comp\c$\logs\*$log*" | sort lastwritetime | select -last 1 | %{n $_}
 }
 
+function n($path) {
+  if ($path -and (test-path $path)) {
+    $path = resolve-path $path
+  }
+  & "C:\Program Files (x86)\Notepad++\notepad++.exe" $path
+}
+
+function New-TemporaryDirectory {
+    $parent = join-path ([System.IO.Path]::GetTempPath()) 'logs'
+    [string] $name = [System.Guid]::NewGuid()
+    $dir = Join-Path $parent $name
+    New-Item -ItemType Directory -Path $dir
+    return $dir
+}
+
+function al() {
+  $temp = (New-TemporaryDirectory)[0]
+  ls ~\code\elba\IB\*\logs\*\* | mv -dest $temp
+  ls $temp\* | %{n $_}
+}
+
+function cl() {
+  ls ~\code\elba\IB\*\logs\*\* | rm
+}
+
+function no($file) {
+  ls -re $file | select -first 1 | %{n $_}
+}
+
+function kvs {
+  get-process devenv -erroraction ignore | stop-process -force
+}
+
+function pull {
+  hg save
+  hg pi
+  hg undo
+}
+
+function giveup {
+  hg revert --all --no-backup
+  hg purge
+}
+
 # posh-git
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-Import-Module ~\code\posh-git\posh-git.psm1
 function global:prompt {
     Write-Host
     $realLASTEXITCODE = $LASTEXITCODE
     Write-Host($pwd.ProviderPath) -nonewline
-    Write-VcsStatus
+    $hgbranch = hg branch
+    if($hgbranch) {
+      write-host " [$hgbranch]" -nonewline -foreground "DarkGray"
+    }
     $global:LASTEXITCODE = $realLASTEXITCODE
     Write-Host
     return "$ "
@@ -274,3 +328,8 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
+
+# Load posh-hg example profile
+# . 'C:\Users\vorou\code\posh-hg\profile.example.ps1'
+
+C:\Users\vorou\Hg.ArgumentCompleters.ps1
