@@ -332,4 +332,4 @@ if (Test-Path($ChocolateyProfile)) {
 # Load posh-hg example profile
 # . 'C:\Users\vorou\code\posh-hg\profile.example.ps1'
 
-C:\Users\vorou\Hg.ArgumentCompleters.ps1
+C:\Users\vorou\code\config\ps\Hg.ArgumentCompleters.ps1
