@@ -34,6 +34,10 @@ New-Alias cl "C:\Users\vorou\code\elba\clear_logs.bat"
 New-Alias msbuild15 "C:\Program Files (x86)\Microsoft Visual Studio\VS15Preview\MSBuild\15.0\Bin\MSBuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
 
+function g($q) {
+  start "https://google.com/search?q=$q"
+}
+
 function idea {
    & "C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 14.1.3\bin\idea.exe" $pwd
 }
@@ -141,15 +145,6 @@ function test-proxy($proxy) {
     http --headers --proxy=http:http://VIP126053:G4R9sQcpE8@$proxy example.org
 }
 
-function mv-oldlogs($root) {
-    $backupRoot = join-path $root "bak"
-    $backupDate = Get-Date -f yyyyMMdd_hhmmss
-    $backupDir = "$backupRoot\\logs_$backupDate\\"
-    mkdir -force $backupDir
-    $logsDir = join-path $root "logs"
-    ls $logsDir | where {$_.LastWriteTime -lt (Get-Date).AddDays(-2)} | mv -dest $backupDir
-}
-
 function find-badreferences($dll, $nuget) {
     $projects = ls -re packages.config | sls $nuget -list | select -expand path | %{split-path (split-path $_ -parent) -leaf}
     ls -re *.csproj | where {sls -simple -pattern $dll $_} | select -expand basename | ? {$_ -notin $projects}
@@ -171,21 +166,9 @@ function save {
     ~\code\config\save.ps1
 }
 
-function bye {
+function off {
     save
     Stop-Computer -Force
-}
-
-function off {
-    Stop-Computer -Force
-}
-
-function c {
-  cd ~\code
-}
-
-function g {
-  cd ~\code\gofra
 }
 
 function Get-Region($id) {
@@ -268,7 +251,15 @@ function n($path) {
   if ($path -and (test-path $path)) {
     $path = resolve-path $path
   }
-  & "C:\Program Files (x86)\Notepad++\notepad++.exe" $path
+  $x86 = "C:\Program Files (x86)\Notepad++\notepad++.exe"
+  $x64 = "C:\Program Files\Notepad++\notepad++.exe"
+  if (test-path $x86) {
+	& $x86 $path
+  } elseif (test-path $x64) {
+	& $x64 $path
+  } else {
+	'notepad++ not installed'
+  }
 }
 
 function New-TemporaryDirectory {
@@ -311,18 +302,20 @@ function giveup {
 # posh-git
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 function global:prompt {
-    Write-Host
     $realLASTEXITCODE = $LASTEXITCODE
-    Write-Host($pwd.ProviderPath) -nonewline
+    $hostname = hostname
+    write-host "<$hostname> " -nonewline -foreground "DarkBlue"
+    Write-Host($pwd.ProviderPath) -nonewline -foreground "DarkGray"
     $hgbranch = hg branch
     if($hgbranch) {
       write-host " [$hgbranch]" -nonewline -foreground "DarkGray"
     }
     $global:LASTEXITCODE = $realLASTEXITCODE
     Write-Host
-    return "$ "
+    return "# "
 }
 Pop-Location
+
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
