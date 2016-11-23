@@ -1,11 +1,11 @@
 # ~/.hgrc
 [extensions]
-bigfiles = ./hg-bigfiles/bigfiles.py
+bigfiles = ~/code/config/hg-bigfiles/bigfiles.py
 rebase =
 hgext.extdiff =
 purge =
 shelve =
-win32chcp = ./win32chcp/hgext/win32chcp.py
+win32chcp = ~/code/config/win32chcp/hgext/win32chcp.py
 strip =
 color =
 
@@ -44,7 +44,7 @@ cdiff = -q
 
 [ui]
 username=vorou <voropaev.viktor@gmail.com>
-ignore=C:\Users\vorou\.hgignore
+ignore=~/.hgignore
 merge = p4merge
 
 [hooks]
