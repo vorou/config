@@ -1,11 +1,11 @@
 # ~/.hgrc
 [extensions]
-bigfiles = C:/Users/vorou/code/elba/Documents/hg-bigfiles/bigfiles.py
+bigfiles = ./hg-bigfiles/bigfiles.py
 rebase =
 hgext.extdiff =
 purge =
 shelve =
-win32chcp = C:/Users/vorou/code/win32chcp/hgext/win32chcp.py
+win32chcp = ./win32chcp/hgext/win32chcp.py
 strip =
 color =
 

@@ -1,0 +1,6 @@
+data/README.ru.rst.i
+data/README.rst.i
+data/.hgignore.i
+data/hgext/win32chcp.py.i
+data/COPYING.i
+data/Makefile.i

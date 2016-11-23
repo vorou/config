@@ -1,0 +1,8 @@
+[extensions]
+bigfiles = Documents\hg-bigfiles\bigfiles.py
+
+[bigfiles]
+repo = \\elba\bigfiles
+
+[hooks]
+update = hg bigupdate --clean
