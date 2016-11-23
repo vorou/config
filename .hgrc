@@ -1,0 +1,78 @@
+# ~/.hgrc
+[extensions]
+bigfiles = C:/Users/vorou/code/elba/Documents/hg-bigfiles/bigfiles.py
+rebase =
+hgext.extdiff =
+purge =
+shelve =
+win32chcp = C:/Users/vorou/code/win32chcp/hgext/win32chcp.py
+strip =
+color =
+
+[pager]
+pager = more
+
+[extdiff]
+# configure extended diff to use colordiff (requires colordiff installed in your system)
+cmd.cdiff = colordiff
+opts.cdiff = -uprN
+cmd.kdiff3 =
+cmd.p4diff = p4merge
+
+[color]
+# configure colors for each possible hg status
+#status.modified = yellow bold
+#status.added = green bold
+#status.removed = red bold
+#status.deleted = cyan bold
+#status.unknown = magenta bold
+#status.ignored = white bold
+# and for hg diff output also
+diff.diffline = bold
+diff.extended = cyan bold
+diff.file_a = red bold
+diff.file_b = green bold
+diff.hunk = magenta
+diff.deleted = red
+diff.inserted = green
+diff.changed = white
+diff.trailingwhitespace = bold red_background
+
+[defaults]
+# suppress noisy extdiff header message
+cdiff = -q
+
+[ui]
+username=vorou <voropaev.viktor@gmail.com>
+ignore=C:\Users\vorou\.hgignore
+merge = p4merge
+
+[hooks]
+update = hg bigupdate --clean
+
+
+[web]
+encoding = utf-8
+
+[merge-tools]
+kdiff3.args = $base $local $other -o $output
+
+[alias]
+pi = pull -u --rebase
+ra = revert --all
+save = commit -A -s -m SAVEPOINT
+undo = strip --keep -r .
+lg = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
+og = out --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
+pn = push --new-branch
+cm = commit -A -m
+upc = update --clean
+
+[tortoisehg]
+fontcomment = Consolas,18,-1,5,50,0,0,0,0,0
+fontdiff = Consolas,18,-1,5,50,0,0,0,0,0
+fontlist = Consolas,18,-1,5,50,0,0,0,0,0
+fontlog = Consolas,18,-1,5,50,0,0,0,0,0
+fontoutputlog = Consolas,18,-1,5,50,0,0,0,0,0
+vdiff = p4merge
+tabwidth = 2

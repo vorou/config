@@ -17,7 +17,7 @@ function mkdlink($link, $target, $message) {
 
 mklink "$home\hosts" "C:\Windows\System32\drivers\etc\hosts" "hosts"
 
-mkdlink "$home\.atom" "$config\.atom" "atom"
+# mkdlink "$home\.atom" "$config\.atom" "atom"
 
 mklink "C:\Program Files\ConEmu\ConEmu.xml" "$config\ConEmu.xml" "ConEmu"
 mklink "C:\Users\vorop\AppData\Roaming\ConEmu.xml" "$config\ConEmu.xml" "ConEmu"
@@ -27,6 +27,9 @@ mklink $profile "$config\Microsoft.PowerShell_profile.ps1" "Powershell"
 
 mklink "$home\.gitconfig" "$config\.gitconfig" "gitconfig"
 mklink "$home\.gitignore" "$config\.gitignore" "gitignore"
+
+mklink "$home\.hgrc" "$config\.hgrc" "hgrc"
+mklink "$home\.hgignore" "$config\.hgignore" "hgignore"
 
 mkdlink "$home\AppData\Roaming\Sublime Text 3\Packages\User" "$config\sublime-3-packages-user\" "Sublime"
 
