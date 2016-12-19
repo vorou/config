@@ -12,7 +12,7 @@ New-Alias restart Restart-Computer
 New-Alias sco sc.exe
 New-Alias f Clear-Host
 New-Alias e explorer.exe
-New-Alias rap "C:\Program Files\Rapid Environment Editor\RapidEE.exe"
+New-Alias rap "C:\ProgramData\chocolatey\bin\rapidee.exe"
 New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
 New-Alias p .\psake.ps1
 New-Alias wh where.exe
