@@ -33,6 +33,8 @@ New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
 New-Alias cl "C:\Users\vorou\code\elba\clear_logs.bat"
 New-Alias msbuild15 "C:\Program Files (x86)\Microsoft Visual Studio\VS15Preview\MSBuild\15.0\Bin\MSBuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
+New-Alias rid "C:\Program Files (x86)\JetBrains\Rider 163.12057\bin\rider64.exe"
+
 
 function g($q) {
   start "https://google.com/search?q=$q"
@@ -252,11 +254,11 @@ function n($path) {
     $path = resolve-path $path
   }
   $x86 = "C:\Program Files (x86)\Notepad++\notepad++.exe"
-  $x64 = "C:\Program Files\Notepad++\notepad++.exe"
+  # $x64 = "C:\Program Files\Notepad++\notepad++.exe"
   if (test-path $x86) {
 	& $x86 $path
-  } elseif (test-path $x64) {
-	& $x64 $path
+  # if (test-path $x64) {
+	# & $x64 $path
   } else {
 	'notepad++ not installed'
   }
