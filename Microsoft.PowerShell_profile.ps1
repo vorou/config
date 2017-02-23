@@ -33,7 +33,7 @@ New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
 New-Alias cl "C:\Users\vorou\code\elba\clear_logs.bat"
 New-Alias msbuild15 "C:\Program Files (x86)\Microsoft Visual Studio\VS15Preview\MSBuild\15.0\Bin\MSBuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
-New-Alias rid "C:\Program Files (x86)\JetBrains\Rider 163.12057\bin\rider64.exe"
+New-Alias rid "C:\Program Files (x86)\JetBrains\Rider 171.3085.362\bin\rider64.exe"
 
 
 function g($q) {
