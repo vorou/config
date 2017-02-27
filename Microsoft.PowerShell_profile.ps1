@@ -14,6 +14,7 @@ New-Alias f Clear-Host
 New-Alias e explorer.exe
 New-Alias rap "C:\ProgramData\chocolatey\bin\rapidee.exe"
 New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
+#New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe"
 New-Alias p .\psake.ps1
 New-Alias wh where.exe
 #New-Alias ssh "C:\bin\gitbin\ssh.exe"
@@ -30,11 +31,11 @@ New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 New-Alias rssv Restart-Service
 New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
 New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
-New-Alias cl "C:\Users\vorou\code\elba\clear_logs.bat"
-New-Alias msbuild15 "C:\Program Files (x86)\Microsoft Visual Studio\VS15Preview\MSBuild\15.0\Bin\MSBuild.exe"
+New-Alias msbuild "C:\Program Files (x86)\MSBuild\14.0\bin\msbuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
-New-Alias rid "C:\Program Files (x86)\JetBrains\Rider 171.3085.362\bin\rider64.exe"
-
+function rid() {
+  & (ls 'C:\Program Files (x86)\JetBrains\Rider*\bin\rider64.exe')[0]
+}
 
 function g($q) {
   start "https://google.com/search?q=$q"
@@ -82,6 +83,10 @@ function respec($to) {
         cp ~\Local.config ~\code\gofra\Source\Front\
     }
     Restart-WebAppPool DefaultAppPool
+}
+
+function com {
+  thg commit
 }
 
 function Reset-Rabbit {
@@ -251,12 +256,13 @@ function ll($log, $comp) {
 
 function n($path) {
   if ($path -and (test-path $path)) {
-    $path = resolve-path $path
+    $path = (resolve-path $path).providerpath
   }
   $x86 = "C:\Program Files (x86)\Notepad++\notepad++.exe"
   # $x64 = "C:\Program Files\Notepad++\notepad++.exe"
   if (test-path $x86) {
-	& $x86 $path
+    $path
+    & $x86 $path
   # if (test-path $x64) {
 	# & $x64 $path
   } else {
@@ -291,14 +297,18 @@ function kvs {
 }
 
 function pull {
-  hg save
-  hg pi
-  hg undo
+  hg status
+  hg incoming
+  hg p
 }
 
 function giveup {
   hg revert --all --no-backup
   hg purge
+}
+
+function ns {
+  n ~\code\elba\IB\Settings\settings
 }
 
 # posh-git
@@ -328,3 +338,5 @@ if (Test-Path($ChocolateyProfile)) {
 # . 'C:\Users\vorou\code\posh-hg\profile.example.ps1'
 
 C:\Users\vorou\code\config\ps\Hg.ArgumentCompleters.ps1
+
+chcp 1251 | out-null
