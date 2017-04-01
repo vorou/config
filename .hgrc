@@ -63,6 +63,7 @@ ra = revert --all
 save = commit -A -s -m SAVEPOINT
 undo = strip --keep -r .
 lg = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
+ls = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
 og = out --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
 pn = push --new-branch
 cm = commit -A -m
