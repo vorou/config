@@ -1,3 +1,19 @@
+[alias]
+p = !hg in --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b . && hg pull -u --rebase
+reset = !hg revert --all && hg purge
+save = commit -A -s -m SAVEPOINT
+undo = strip --keep -r .
+lg = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b
+ls = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
+og = out --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
+ig = in --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
+cm = commit -A -m
+upc = update --clean
+close = commit --close-branch -m 'close'
+push = push -b . --new-branch
+wat = log -p -r
+sha = id -i
+
 # ~/.hgrc
 [extensions]
 bigfiles = ~/code/config/hg-bigfiles/bigfiles.py
@@ -5,9 +21,13 @@ rebase =
 hgext.extdiff =
 purge =
 shelve =
-win32chcp = ~/code/config/win32chcp/hgext/win32chcp.py
+#win32chcp = ~/code/config/win32chcp/hgext/win32chcp.py
 strip =
 color =
+mq = 
+eol=
+churn =
+progress =
 
 [pager]
 pager = more
@@ -17,7 +37,7 @@ pager = more
 cmd.cdiff = colordiff
 opts.cdiff = -uprN
 cmd.kdiff3 =
-cmd.p4diff = p4merge
+# cmd.p4diff = p4merge
 
 [color]
 # configure colors for each possible hg status
@@ -45,10 +65,10 @@ cdiff = -q
 [ui]
 username=vorou <voropaev.viktor@gmail.com>
 ignore=~/.hgignore
-merge = p4merge
+merge = kdiff3
 
 [hooks]
-update = hg bigupdate --clean
+#update = hg bigupdate --clean
 
 
 [web]
@@ -57,22 +77,14 @@ encoding = utf-8
 [merge-tools]
 kdiff3.args = $base $local $other -o $output
 
-[alias]
-pi = pull -u --rebase
-ra = revert --all
-save = commit -A -s -m SAVEPOINT
-undo = strip --keep -r .
-lg = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
-og = out --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
-pn = push --new-branch
-cm = commit -A -m
-upc = update --clean
-
 [tortoisehg]
 fontcomment = Consolas,18,-1,5,50,0,0,0,0,0
 fontdiff = Consolas,18,-1,5,50,0,0,0,0,0
 fontlist = Consolas,18,-1,5,50,0,0,0,0,0
 fontlog = Consolas,18,-1,5,50,0,0,0,0,0
 fontoutputlog = Consolas,18,-1,5,50,0,0,0,0,0
-vdiff = p4merge
 tabwidth = 2
+issue.regex = [EDP]{1,3}-\d{1,10}
+issue.link = https://yt-elba.testkontur.ru/youtrack/issue/{0}
+authorcolor = True
+vdiff = meld

@@ -1,3 +1,5 @@
+my.*
+ProjectLabelPlugin.xml
 sln
 
 syntax: regexp
