@@ -13,8 +13,8 @@ New-Alias sco sc.exe
 New-Alias f Clear-Host
 New-Alias e explorer.exe
 New-Alias rap "C:\ProgramData\chocolatey\bin\rapidee.exe"
-New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
-#New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe"
+#New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
+New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe"
 New-Alias p .\psake.ps1
 New-Alias wh where.exe
 #New-Alias ssh "C:\bin\gitbin\ssh.exe"
@@ -33,8 +33,10 @@ New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
 New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
 New-Alias msbuild "C:\Program Files (x86)\MSBuild\14.0\bin\msbuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
+New-Alias vim "C:\bin\Neovim\bin\nvim-qt.exe"
+
 function rid() {
-  & (ls 'C:\Program Files (x86)\JetBrains\Rider*\bin\rider64.exe')[0]
+  & (ls "C:\Program Files\JetBrains\Rider*\bin\rider64.exe")[0]
 }
 
 function g($q) {

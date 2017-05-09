@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2017-04-04 22:01:55" build="170316">
+		<key name=".Vanilla" modified="2017-05-07 17:39:00" build="170227">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -140,7 +140,7 @@
 			<value name="ColorKeyTransparent" type="hex" data="00"/>
 			<value name="ColorKeyValue" type="dword" data="00010101"/>
 			<value name="UseCurrentSizePos" type="hex" data="01"/>
-			<value name="WindowMode" type="dword" data="0000051f"/>
+			<value name="WindowMode" type="dword" data="00000521"/>
 			<value name="ConWnd Width" type="dword" data="0000003d"/>
 			<value name="ConWnd Height" type="dword" data="0000000e"/>
 			<value name="Cascaded" type="hex" data="01"/>
@@ -817,7 +817,7 @@
 			<value name="StartCreateDelay" type="ulong" data="100"/>
 			<value name="DefaultTerminalDebugLog" type="hex" data="00"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
-			<value name="LastMonitor" type="string" data="78,0,1920,1080"/>
+			<value name="LastMonitor" type="string" data="0,0,1920,1080"/>
 			<value name="ProcessCtrlZ" type="hex" data="00"/>
 			<value name="SuppressBells" type="hex" data="01"/>
 			<value name="Anti-aliasing2" type="hex" data="00"/>

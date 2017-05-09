@@ -16,7 +16,7 @@ sha = id -i
 
 # ~/.hgrc
 [extensions]
-bigfiles = ~/code/config/hg-bigfiles/bigfiles.py
+#bigfiles = ~/code/config/hg-bigfiles/bigfiles.py
 rebase =
 hgext.extdiff =
 purge =
