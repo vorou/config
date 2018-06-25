@@ -1,0 +1,89 @@
+[ghfw]
+disableverification = "true"
+[user]
+	name = vorou
+	email = vorou@skbkontur.ru
+[core]
+autocrlf = true
+excludesfile = "C:\\\\Users\\\\vorou\\\\.gitignore"
+# editor = atom --wait
+	# editor = 'c:/program files/sublime text 3/subl.exe' -w
+pager = less
+[alias]
+a = add
+aa = add -A
+amend = commit -a --amend --no-edit
+ap = add --patch
+b = branch
+ba = branch -a
+back = checkout -
+bd = branch -D
+bm = branch -m
+c = !git add -A && git commit
+cf = commit --fixup
+cg = config --global
+ci = commit
+cim = commit -m
+cl = clean
+cm = !git add -A && git commit -m
+co = checkout
+cob = checkout -b
+cot = checkout --track
+cp = cherry-pick
+d = diff
+dc = diff --cached
+dh = diff HEAD^
+l = !git log --color --pretty=tformat:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+log = "log --color --pretty=format:'%Cred%h%Creset%n%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n%n' --abbrev-commit"
+ls = !git --no-pager log develop.. --color --pretty=tformat:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+md = !git co develop && git pull && git back && git merge develop
+mt = mergetool
+p = pull
+pu = push -u
+r = rebase
+ra = rebase --abort
+rc = rebase --continue
+ri = rebase --interactive
+save = !git add -A && git commit -m 'SAVEPOINT'
+sha = !git rev-parse head
+sl = stash list
+sp = stash pop
+ss = !git aa && git stash save
+st = status
+undo = reset HEAD~1 --mixed
+wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+[clean]
+requireForce = false
+[push]
+default = current
+[merge]
+	tool = kdiff3
+[mergetool]
+prompt = false
+keepBackup = false
+[mergetool "kdiff3"]
+cmd = \"C:\\\\Program Files\\\\KDiff3\\\\kdiff3\" $BASE $LOCAL $REMOTE -o $MERGED --auto
+[branch]
+autosetuprebase = always
+[credential]
+	helper = manager
+[filter "hawser"]
+clean = git hawser clean %f
+smudge = git hawser smudge %f
+required = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[difftool "sourcetree"]
+cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+trustExitCode = true
+[http]
+sslVerify = false
+sslCAinfo = /bin/curl-ca-bundle.crt
+[color]
+	ui = never
+	diff = true

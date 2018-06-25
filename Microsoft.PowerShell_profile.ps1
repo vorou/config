@@ -33,10 +33,9 @@ New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
 New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
 New-Alias msbuild "C:\Program Files (x86)\MSBuild\14.0\bin\msbuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
-New-Alias vim "C:\bin\Neovim\bin\nvim-qt.exe"
 
 function rid() {
-  & (ls "C:\Program Files\JetBrains\Rider*\bin\rider64.exe")[0]
+  & (ls "C:\Users\vorou\AppData\Local\JetBrains\Toolbox\apps\Rider\ch-0\*\bin\rider64.exe")[0] $args
 }
 
 function g($q) {
@@ -318,7 +317,7 @@ Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
     $hostname = hostname
-    write-host "<$hostname> " -nonewline -foreground "DarkBlue"
+    write-host "" -nonewline -foreground "DarkBlue"
     Write-Host($pwd.ProviderPath) -nonewline -foreground "DarkGray"
     $hgbranch = hg branch
     if($hgbranch) {
@@ -326,7 +325,7 @@ function global:prompt {
     }
     $global:LASTEXITCODE = $realLASTEXITCODE
     Write-Host
-    return "# "
+    return "> "
 }
 Pop-Location
 

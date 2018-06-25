@@ -5,7 +5,7 @@ function HgCompletion {
       Where-Object {$_ -like "$wordToComplete*"} |
       Sort-Object |
       ForEach-Object {
-          New-CompletionResult -CompletionText $_
+          $_
       }
 }
 
