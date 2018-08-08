@@ -31,7 +31,7 @@ New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 New-Alias rssv Restart-Service
 New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
 New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
-New-Alias msbuild "C:\Program Files (x86)\MSBuild\14.0\bin\msbuild.exe"
+New-Alias msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
 New-Alias ba "C:\Users\vorou\ba.bat"
 
 function rid() {

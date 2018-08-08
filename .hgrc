@@ -3,41 +3,35 @@ p = !hg in --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -
 reset = !hg revert --all && hg purge
 save = commit -A -s -m SAVEPOINT
 undo = strip --keep -r .
-lg = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b
-ls = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
-og = out --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
-ig = in --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person})\n" -b .
+lg = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age} \x1B[1m{branches}\n" -b
+ls = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age} \x1B[1m{branches}\n" -b .
+rc = log -l10 --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age} \x1B[1m{branches}\n" -b .
+og = out --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age} \x1B[1m{branches}\n" -b .
+ig = in --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age} \x1B[1m{branches}\n" -b .
 cm = commit -A -m
 upc = update --clean
-close = commit --close-branch -m 'close'
+close = !hg commit --close-branch -m 'close' && hg push -b .
 push = push -b . --new-branch
 wat = log -p -r
 sha = id -i
+go = !hg branch $1 && hg cm init
 
 # ~/.hgrc
 [extensions]
 largefiles=
 rebase =
-hgext.extdiff =
+extdiff =
 purge =
 shelve =
 #win32chcp = ~/code/config/win32chcp/hgext/win32chcp.py
 strip =
-color =
 mq = 
 eol=
 churn =
 progress =
 
 [pager]
-pager = more
-
-[extdiff]
-# configure extended diff to use colordiff (requires colordiff installed in your system)
-cmd.cdiff = colordiff
-opts.cdiff = -uprN
-cmd.kdiff3 =
-# cmd.p4diff = p4merge
+pager =
 
 [color]
 # configure colors for each possible hg status
@@ -57,6 +51,7 @@ diff.deleted = red
 diff.inserted = green
 diff.changed = white
 diff.trailingwhitespace = bold red_background
+mode = win32
 
 [defaults]
 # suppress noisy extdiff header message
@@ -66,26 +61,32 @@ cdiff = -q
 username=vorou <voropaev.viktor@gmail.com>
 ignore=~/.hgignore
 merge = kdiff3
+diff = kdiff3
+color = yes
 
 [hooks]
 #update = hg bigupdate --clean
-
 
 [web]
 encoding = utf-8
 
 [merge-tools]
-kdiff3.args = $base $local $other -o $output
+kdiff3.args = $base $local $other -o $output --auto
+# p4merge.priority = 100 
+# p4merge.premerge = True
+# p4merge.gui = True 
+# p4merge.args = $base $local $other $output
 
 ls = log --template "{node|short}: \x1B[2m{desc} \x1B[6m({author|person}) | {date|age}\n" -b .
 [tortoisehg]
-fontcomment = Consolas,18,-1,5,50,0,0,0,0,0
-fontdiff = Consolas,18,-1,5,50,0,0,0,0,0
-fontlist = Consolas,18,-1,5,50,0,0,0,0,0
-fontlog = Consolas,18,-1,5,50,0,0,0,0,0
-fontoutputlog = Consolas,18,-1,5,50,0,0,0,0,0
+fontcomment = Fira Code,12,-1,5,50,0,0,0,0,0
+fontdiff = Fira Code,12,-1,5,50,0,0,0,0,0
+fontlist = Fira Code,12,-1,5,50,0,0,0,0,0
+fontlog = Fira Code,12,-1,5,50,0,0,0,0,0
+fontoutputlog = Fira Code,12,-1,5,50,0,0,0,0,0
 tabwidth = 2
 issue.regex = [EDP]{1,3}-\d{1,10}
 issue.link = https://yt-elba.testkontur.ru/youtrack/issue/{0}
 authorcolor = True
 vdiff = meld
+closeci = True
