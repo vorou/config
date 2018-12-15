@@ -34,7 +34,6 @@ Assemblies/Elba\..*\.exe
 .*~
 \.DS_Store
 .*ReSharper.*
-packages
 [Tt]est[Rr]esult.*
 .*\.schemaview
 FunctionalTestsIB/Tests/Configuration/functionalTestsConfig

@@ -2,7 +2,7 @@
 ###################
 *.com
 *.class
-*.dll
+# *.dll
 *.exe
 *.o
 *.so
@@ -83,7 +83,7 @@ dlldata.c
 *.meta
 *.obj
 *.pch
-*.pdb
+# *.pdb
 *.pgc
 *.pgd
 *.rsp
@@ -173,9 +173,9 @@ publish/
 *.publishproj
 
 # NuGet Packages
-*.nupkg
+# *.nupkg
 # The packages folder can be ignored because of Package Restore
-**/packages/*
+# **/packages/*
 # except build/, which is used as an MSBuild target.
 # !**/packages/build/
 # If using the old MSBuild-Integrated Package Restore, uncomment this:

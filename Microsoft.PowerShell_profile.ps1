@@ -9,33 +9,19 @@ Import-Module ZLocation
 
 Remove-Item alias:curl
 New-Alias restart Restart-Computer
-New-Alias sco sc.exe
-New-Alias f Clear-Host
 New-Alias e explorer.exe
 New-Alias rap "C:\ProgramData\chocolatey\bin\rapidee.exe"
 #New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
 New-Alias vs "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe"
-New-Alias p .\psake.ps1
-New-Alias wh where.exe
-#New-Alias ssh "C:\bin\gitbin\ssh.exe"
 New-Alias 7z "C:\Program Files\7-Zip\7z.exe"
-New-Alias rabbitmqctl "C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.5.4\sbin\rabbitmqctl.bat"
 New-Alias kdiff "C:\Program Files\KDiff3\kdiff3.exe"
-New-Alias st "C:\Program Files (x86)\Atlassian\SourceTree\SourceTree.exe"
-New-Alias json ConvertFrom-Json
-New-Alias gh "C:\Users\vorou\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub.appref-ms"
-New-Alias subl "C:\Program Files\Sublime Text 3\sublime_text.exe"
-New-Alias rein 'C:\bin\ReadyToIndex\ReadyToIndexMessageSender.exe'
-New-Alias down 'C:\bin\DownloadAttachments\DownloadAttachments.exe'
-New-Alias npp 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 New-Alias rssv Restart-Service
-New-Alias rbm 'C:\Program Files\Robomongo 0.9.0-RC4\Robomongo.exe'
-New-Alias t "C:\Program Files\TortoiseHg\thgw.exe"
-New-Alias msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
-New-Alias ba "C:\Users\vorou\ba.bat"
 
 function rid() {
-  & (ls "C:\Users\vorou\AppData\Local\JetBrains\Toolbox\apps\Rider\ch-0\*\bin\rider64.exe")[0] $args
+  # $path = "C:\Users\vorou\AppData\Local\JetBrains\Toolbox\apps\Rider\ch-0\181.4952.311\bin\rider64.exe"
+  & (ls "C:\Users\vorou\AppData\Local\JetBrains\Toolbox\apps\Rider\ch-0\*\bin\rider64.exe" | select -last 1) $args
+  # $path = 'C:\Users\vorou\AppData\Local\JetBrains\Toolbox\apps\Rider\ch-0\182.4231.348\bin\rider64.exe'
+  # & (ls $path)[0] $args
 }
 
 function g($q) {
@@ -240,14 +226,6 @@ function import-dump {
   ls -re ~\Desktop\dump\*message* | %{$msg = cat $_ | json; $msg | add-member -Name 'Source' -Value $_.FullName,$_.FullName.replace('message','info'),$_.FullName.replace('message','properties') -MemberType NoteProperty; $msg | Add-MdbcData}
 }
 
-function pc {
-  p compile
-}
-
-function lq {
-  cat C:\elasticsearch\logs\*_index_search_slowlog.log -enc utf8 | select -last 1 | %{$_ -match 'source\[(.*)\], extra_source'} | %{$Matches[1]}
-}
-
 function ll($log, $comp) {
   if(!($comp)) {
     $comp = hostname
@@ -260,15 +238,15 @@ function n($path) {
     $path = (resolve-path $path).providerpath
   }
   $x86 = "C:\Program Files (x86)\Notepad++\notepad++.exe"
-  # $x64 = "C:\Program Files\Notepad++\notepad++.exe"
+  $x64 = "C:\Program Files\Notepad++\notepad++.exe"
   if (test-path $x86) {
     $path
     & $x86 $path
-  # if (test-path $x64) {
-	# & $x64 $path
+  } else {if (test-path $x64) {
+	& $x64 $path
   } else {
 	'notepad++ not installed'
-  }
+  }}
 }
 
 function New-TemporaryDirectory {
@@ -281,8 +259,13 @@ function New-TemporaryDirectory {
 
 function al() {
   $temp = (New-TemporaryDirectory)[0]
-  ls ~\code\elba\IB\*\logs\*\* | mv -dest $temp
-  ls $temp\* | %{n $_}
+  ls \logs\*\* | mv -dest $temp
+  # ls $temp\* | %{n $_}
+  & code $temp
+}
+
+function ol() {
+  & code \logs\
 }
 
 function cl() {
@@ -312,22 +295,9 @@ function ns {
   n ~\code\elba\IB\Settings\settings
 }
 
-# posh-git
-Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-function global:prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
-    $hostname = hostname
-    write-host "" -nonewline -foreground "DarkBlue"
-    Write-Host($pwd.ProviderPath) -nonewline -foreground "DarkGray"
-    $hgbranch = hg branch
-    if($hgbranch) {
-      write-host " [$hgbranch]" -nonewline -foreground "DarkGray"
-    }
-    $global:LASTEXITCODE = $realLASTEXITCODE
-    Write-Host
-    return "> "
+function log($q) {
+  code (ls -file -re \logs\ -inc "*$q*" | sort -desc)[0]
 }
-Pop-Location
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -335,9 +305,6 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 
-# Load posh-hg example profile
-# . 'C:\Users\vorou\code\posh-hg\profile.example.ps1'
-
-C:\Users\vorou\code\config\ps\Hg.ArgumentCompleters.ps1
-
 chcp 1251 | out-null
+
+Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'

@@ -1,89 +1,94 @@
 [ghfw]
-disableverification = "true"
+	disableverification = true
 [user]
 	name = vorou
-	email = vorou@skbkontur.ru
+	email = voropaev.viktor@gmail.com
+	username = vorou
 [core]
-autocrlf = true
-excludesfile = "C:\\\\Users\\\\vorou\\\\.gitignore"
-# editor = atom --wait
-	# editor = 'c:/program files/sublime text 3/subl.exe' -w
-pager = less
+	autocrlf = false
+	# excludesfile = C:\\\\Users\\\\vorou\\\\.gitignore
+	pager =
 [alias]
-a = add
-aa = add -A
-amend = commit -a --amend --no-edit
-ap = add --patch
-b = branch
-ba = branch -a
-back = checkout -
-bd = branch -D
-bm = branch -m
-c = !git add -A && git commit
-cf = commit --fixup
-cg = config --global
-ci = commit
-cim = commit -m
-cl = clean
-cm = !git add -A && git commit -m
-co = checkout
-cob = checkout -b
-cot = checkout --track
-cp = cherry-pick
-d = diff
-dc = diff --cached
-dh = diff HEAD^
-l = !git log --color --pretty=tformat:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-log = "log --color --pretty=format:'%Cred%h%Creset%n%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n%n' --abbrev-commit"
-ls = !git --no-pager log develop.. --color --pretty=tformat:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-md = !git co develop && git pull && git back && git merge develop
-mt = mergetool
-p = pull
-pu = push -u
-r = rebase
-ra = rebase --abort
-rc = rebase --continue
-ri = rebase --interactive
-save = !git add -A && git commit -m 'SAVEPOINT'
-sha = !git rev-parse head
-sl = stash list
-sp = stash pop
-ss = !git aa && git stash save
-st = status
-undo = reset HEAD~1 --mixed
-wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+	a = add
+	aa = add -A
+	ap = add --patch
+	b = branch
+	ba = branch -a
+	back = checkout -
+	bd = branch -D
+	bm = branch -m
+	ca = !git add -A && git commit --amend --no-edit
+	ci = commit
+	cl = clean
+	cm = !git add -A && git commit -m
+	co = checkout
+	cob = checkout -b
+	cot = checkout --track
+	cp = cherry-pick
+	d = diff
+	mt = mergetool
+	p = pull
+	r = rebase
+	ra = rebase --abort
+	rc = rebase --continue
+	ri = rebase --interactive
+	save = !git add -A && git commit -m 'SAVEPOINT'
+	sha = !git rev-parse head
+	sl = stash list
+	sp = stash pop
+	ss = !git aa && git stash save
+	st = status
+	undo = reset HEAD~1 --mixed
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+	lg3 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	ls = !git lg3 master..
+	l = !git lg3 -20
+	md = !git fetch && git merge origin/master
+	dc = diff --cached
+	dh = diff head^
+	cb = rev-parse --abbrev-ref HEAD
+	og = !git l '@{u}..'
+	in = !git log ..@{u}
 [clean]
-requireForce = false
+	requireForce = false
 [push]
-default = current
+	default = current
 [merge]
 	tool = kdiff3
 [mergetool]
-prompt = false
-keepBackup = false
+	prompt = false
+	keepBackup = false
 [mergetool "kdiff3"]
-cmd = \"C:\\\\Program Files\\\\KDiff3\\\\kdiff3\" $BASE $LOCAL $REMOTE -o $MERGED --auto
+	cmd = \"C:\\\\Program Files\\\\KDiff3\\\\kdiff3\" $BASE $LOCAL $REMOTE -o $MERGED --auto
+	path = C:/Program Files/KDiff3/kdiff3.exe
 [branch]
-autosetuprebase = always
+	autosetuprebase = always
 [credential]
 	helper = manager
 [filter "hawser"]
-clean = git hawser clean %f
-smudge = git hawser smudge %f
-required = true
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 [difftool "sourcetree"]
-cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$LOCAL\" \"$REMOTE\"
+	cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
-cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
-trustExitCode = true
+	cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true
 [http]
-sslVerify = false
-sslCAinfo = /bin/curl-ca-bundle.crt
+	sslVerify = false
+	sslCAinfo = /bin/curl-ca-bundle.crt
 [color]
 	ui = never
 	diff = true
+[diff]
+	guitool = kdiff3
+	renameLimit = 1000
+[difftool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
+[rerere]
+	enabled = true

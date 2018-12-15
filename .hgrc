@@ -15,6 +15,7 @@ push = push -b . --new-branch
 wat = log -p -r
 sha = id -i
 go = !hg branch $1 && hg cm init
+battle = !hg pull -b battle && hg merge battle
 
 # ~/.hgrc
 [extensions]
@@ -68,7 +69,7 @@ color = yes
 #update = hg bigupdate --clean
 
 [web]
-encoding = utf-8
+# encoding = utf-8
 
 [merge-tools]
 kdiff3.args = $base $local $other -o $output --auto
